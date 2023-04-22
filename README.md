@@ -1,14 +1,19 @@
 # engineer-plusplus
 
 ## 技術スタック
+### product
 - node -v v18.13.0
 - next.js 13.3.1
 - storybook v7
 - typescript
+### css
 - styled-component
+### DB, Auth
 - firebase
   - firestore
   - fireauth
+### 状態管理
+- recoil
 
 ## 環境構築
 1. `git clone amatech-repo/engineer-plusplus`
