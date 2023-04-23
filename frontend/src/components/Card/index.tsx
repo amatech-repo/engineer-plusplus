@@ -3,8 +3,8 @@ import LiveTvIcon from "@mui/icons-material/LiveTv";
 
 interface CardProps {
   title: string;
-  totalStudyTime: number;
-  tag: string[];
+  totalStudyTime: number | string;
+  tags: string[];
 }
 
 const Card = ({ title, totalStudyTime, tag }: CardProps) => {
