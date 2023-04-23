@@ -3,6 +3,8 @@ import Card from "../Card";
 
 const RecentStudy = () => {
   return (
+    <>
+      <h3>最近の学習</h3>
     <CardContainer>
       <ContainerContent>
         <Card title="React入門" totalStudyTime={10} tag={["React", "JavaScript", "Web開発"]} />
@@ -11,6 +13,7 @@ const RecentStudy = () => {
         <Card title="React入門" totalStudyTime={10} tag={["React", "JavaScript", "Web開発"]} />
       </ContainerContent>
     </CardContainer>
+    </>
   );
 };
 
