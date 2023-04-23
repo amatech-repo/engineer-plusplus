@@ -1,12 +1,11 @@
 import "@/styles/globals.css";
-import Head from "next/head";
 import type { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from '../../config/theme';
-import createEmotionCache from '../../config/createEmotionCache';
+import theme from '../config/theme';
+import createEmotionCache from '../config/createEmotionCache';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -14,8 +13,7 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
-export default function MyApp(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
