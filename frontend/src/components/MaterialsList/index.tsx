@@ -42,5 +42,6 @@ const CardContainer = styled.ul`
 `;
 
 const ContainerContent = styled.li`
+  list-style: none;
   margin: 8px;
 `;
