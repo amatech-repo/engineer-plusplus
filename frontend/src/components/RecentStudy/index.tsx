@@ -3,7 +3,7 @@ import Card from "../Card";
 
 const RecentStudy = () => {
   return (
-    <>
+    <div>
       <h3>最近の学習</h3>
       <CardContainer>
         <ContainerContent>
@@ -13,7 +13,7 @@ const RecentStudy = () => {
           <Card title="React入門" totalStudyTime={10} tags={["React", "JavaScript", "Web開発"]} />
         </ContainerContent>
       </CardContainer>
-    </>
+    </div>
   );
 };
 
