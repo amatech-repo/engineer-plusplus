@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const Navigation = () => {
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<>(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);

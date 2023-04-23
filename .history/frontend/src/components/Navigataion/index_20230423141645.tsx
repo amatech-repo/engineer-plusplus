@@ -101,7 +101,7 @@ const BurgerMenu = styled.div`
   }
 
   div:nth-child(1) {
-    transform: ${({ showMenu }) =>
+    transform: ${({ showMenu: boolean }) =>
       showMenu ? "rotate(45deg) translate(5px, 5px)" : "rotate(0)"};
   }
 
