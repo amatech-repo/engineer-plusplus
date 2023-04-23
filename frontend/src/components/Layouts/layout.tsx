@@ -18,6 +18,7 @@ export default Layout;
 const Wrapper = styled.div`
   height: 100%;
   width: 100%;
+  color: #212121;
 `;
 
 const Sidebar = styled.div`
@@ -34,4 +35,5 @@ const Main = styled.div`
   height: 100vh;
   width: calc(100% - 600px);
   margin: auto;
+  margin-top: 24px;
 `;

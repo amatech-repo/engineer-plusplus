@@ -34,5 +34,29 @@
     "thumbnail": "https://example.com/images/python-basics-thumbnail.jpg",
     "registered_at": "2022-04-20T09:15:00Z",
     "tags": ["Python", "プログラミング"]
+  },
+  {
+    "id": 4,
+    "title": "React入門",
+    "author": "田中花子",
+    "description": "Reactを使ったWebアプリケーションの開発方法を学ぶことができます。",
+    "total_study_time": "1.5",
+    "url": "https://example.com/react-introduction",
+    "category_id": 2,
+    "thumbnail": "https://example.com/images/react-intro-thumbnail.jpg",
+    "registered_at": "2022-04-23T15:30:00Z",
+    "tags": ["React", "JavaScript", "Web開発"]
+  },
+  {
+    "id": 5,
+    "title": "React入門",
+    "author": "田中花子",
+    "description": "Reactを使ったWebアプリケーションの開発方法を学ぶことができます。",
+    "total_study_time": "1.5",
+    "url": "https://example.com/react-introduction",
+    "category_id": 2,
+    "thumbnail": "https://example.com/images/react-intro-thumbnail.jpg",
+    "registered_at": "2022-04-23T15:30:00Z",
+    "tags": ["React", "JavaScript", "Web開発"]
   }
 ]

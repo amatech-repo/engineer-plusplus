@@ -7,7 +7,12 @@ const Dashboard = () => {
   return (
     <>
       <RecentStudy />
-      <MaterialList />
+      <MaterialList listTitle="教材一覧"/>
+      <MaterialList listTitle="Youtube"/>
+      <MaterialList listTitle="Udemy" />
+      <MaterialList listTitle="Progate" />
+      <MaterialList listTitle="書籍" />
+      <MaterialList listTitle="その他" />
     </>
   );
 };

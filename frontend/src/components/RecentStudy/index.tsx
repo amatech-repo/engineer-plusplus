@@ -5,19 +5,20 @@ const RecentStudy = () => {
   return (
     <>
       <h3>最近の学習</h3>
-    <CardContainer>
-      <ContainerContent>
-        <Card title="React入門" totalStudyTime={10} tags={["React", "JavaScript", "Web開発"]} />
-      </ContainerContent>
-      <ContainerContent>
-        <Card title="React入門" totalStudyTime={10} tags={["React", "JavaScript", "Web開発"]} />
-      </ContainerContent>
-    </CardContainer>
+      <CardContainer>
+        <ContainerContent>
+          <Card title="React入門" totalStudyTime={10} tags={["React", "JavaScript", "Web開発"]} />
+        </ContainerContent>
+        <ContainerContent>
+          <Card title="React入門" totalStudyTime={10} tags={["React", "JavaScript", "Web開発"]} />
+        </ContainerContent>
+      </CardContainer>
     </>
   );
 };
 
 export default RecentStudy;
+
 
 const CardContainer = styled.div`
   display: flex;

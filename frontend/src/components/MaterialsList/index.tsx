@@ -5,31 +5,39 @@ import materialsData from "../data/materialsMock.json";
 
 const data = materialsData;
 
-const MaterialList = () => {
+interface Props {
+  listTitle: string;
+}
+
+const MaterialList = (props: Props) => {
+  const { listTitle } = props;
+
   return (
-    <>
-    {/* TODO: youtube一覧やudemy一覧などカテゴリによってフィルタリングできるようにする */}
-      <ContainerTitle>教材一覧</ContainerTitle>
+    <Container>
+      {/* TODO: youtube一覧やudemy一覧などカテゴリによってフィルタリングできるようにする */}
+      <h3>{listTitle}</h3>
       <CardContainer>
         {data.map((item) => (
-        <ContainerContent key={item.id}>
-          <Card  title={item.title} totalStudyTime={item.total_study_time} tags={item.tags} />
-        </ContainerContent>
+          <ContainerContent key={item.id}>
+            <Card title={item.title} totalStudyTime={item.total_study_time} tags={item.tags} />
+          </ContainerContent>
         ))}
       </CardContainer>
-    </>
+    </Container>
   );
 };
 
 export default MaterialList;
 
-const ContainerTitle = styled.h3`
-  color: #212121;
+const Container = styled.div`
+  margin-top: 24px;
+  width: 100%;
 `;
 
 const CardContainer = styled.ul`
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
   white-space: nowrap;
 `;
 
