@@ -1,0 +1,32 @@
+const mockData = 
+  {
+    id: 1,
+    title: "React入門",
+    author: "山田太郎",
+    description: "Reactを学ぶための入門書です。",
+    url: "https://example.com/react-introduction",
+    categoryId: 2,
+    thumbnailImageUrl: "https://example.com/react-thumbnail.jpg",
+    registeredAt: 1649653200000 // 2022/04/10 00:00:00
+  },
+  {
+    id: 2,
+    title: "JavaScriptの基礎",
+    author: "田中花子",
+    description: "JavaScriptの基本的な概念について解説しています。",
+    url: "https://example.com/javascript-basics",
+    categoryId: 1,
+    thumbnailImageUrl: "https://example.com/javascript-thumbnail.jpg",
+    registeredAt: 1649804400000 // 2022/04/12 00:00:00
+  },
+  {
+    id: 3,
+    title: "Pythonプログラミング",
+    author: "佐藤次郎",
+    description: "Pythonの基礎から応用まで幅広く学べる書籍です。",
+    url: "https://example.com/python-programming",
+    categoryId: 3,
+    thumbnailImageUrl: "https://example.com/python-thumbnail.jpg",
+    registeredAt: 1649977200000 // 2022/04/14 00:00:00
+  }
+];
