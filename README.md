@@ -1,6 +1,7 @@
 # engineer-plusplus
 
 ## ディレクトリ構成
+```md
 ./frontend/src
 ├── components        # 各コンポーネント（汎用性の高いもの、ボタンやナビゲーションなど）
 │   ├── Layouts       # レイアウトコンポーネント（ナビゲーションをimportしている）
@@ -8,8 +9,10 @@
 ├── pages             # 各ページ
 ├── store             # recoilの状態管理を行う（ログイン中かの有無など）
 │   └── Auth
+```
 
 ## ページ構成
+```md
 ./frontend/src/pages
 ├── _app.tsx
 ├── auth        # loginやregister画面（ログインと新規登録画面を切り替えたい、デフォルトはログイン）
@@ -18,6 +21,7 @@
 ├── index.tsx   # root
 ├── questions   # 質問投稿、一覧画面（投稿とかもできる
 └── timeline    # タイムライン（教材ごとの質問や他ユーザの質問など）
+```
 
 ## 技術スタック
 ### product
