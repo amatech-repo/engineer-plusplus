@@ -22,7 +22,6 @@ const CatetoryList = (props: Props) => {
             categoryID: e.target.value,
         }
         setMaterial(newMaterial);
-        console.log(newMaterial);
     };
 
     return (
