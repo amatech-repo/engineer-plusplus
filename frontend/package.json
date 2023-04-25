@@ -21,26 +21,19 @@
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "@types/styled-components": "^5.1.26",
-<<<<<<< HEAD
-    "chart.js": "^4.2.1",
-=======
     "bootstrap": "^5.2.3",
->>>>>>> 4419265dbd2360aac647add8044ef95276f85fe4
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "firebase": "^9.20.0",
     "lodash": "^4.17.21",
     "lodash.camelcase": "^4.3.0",
     "next": "13.3.1",
-<<<<<<< HEAD
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
-=======
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reactstrap": "^9.1.9",
->>>>>>> 4419265dbd2360aac647add8044ef95276f85fe4
     "recoil": "^0.7.7",
     "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.10",
