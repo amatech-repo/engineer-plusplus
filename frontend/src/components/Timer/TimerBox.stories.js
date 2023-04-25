@@ -1,4 +1,4 @@
-import TimerButtons from "./TimerButtons";
+import TimerButtons from "./TimerBox";
 
 export default {
   title: "Components/TimerButtons",
