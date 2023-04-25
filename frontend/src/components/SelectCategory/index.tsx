@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import categoriesData from "../data/categoryMocks.json";
 import { useState } from 'react';
+import { useRecoilState } from "recoil";
+import { materialState } from "@/store/Auth/material";
 
 const mockData = categoriesData;
 
@@ -9,11 +11,18 @@ interface Props {
 }
 
 const CatetoryList = (props: Props) => {
+    const [material, setMaterial] = useRecoilState(materialState);
     const [selectedCategory, setSelectedCategory] = useState('');
     const { listTitle } = props
 
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value);
+        const newMaterial = {
+            ...material,
+            categoryID: e.target.value,
+        }
+        setMaterial(newMaterial);
+        console.log(newMaterial);
     };
 
     return (
@@ -23,7 +32,7 @@ const CatetoryList = (props: Props) => {
                 <SelectContainer id="category" value={selectedCategory} onChange={handleCategoryChange}>
                     <option value="">--選択してください--</option>
                     {mockData.map((category) => (
-                        <option key={category.id} value={category.name}>
+                        <option key={category.id} value={category.id}>
                             {category.name}
                         </option>
                     ))}
