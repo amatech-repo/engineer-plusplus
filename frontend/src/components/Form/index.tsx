@@ -27,7 +27,6 @@ const Form = (props: Props) => {
                     <TextareaContainer {...rest} onChange={handleChange}/>
                     ) : (
                         <InputContainer type="text" value={text} onChange={handleChange} />
-                        // <input type="text" value={text} onChange={handleChange} />
                 )}
             </form>
 
