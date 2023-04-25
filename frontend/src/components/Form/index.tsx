@@ -1,5 +1,8 @@
+import { materialState } from "@/store/Auth/material";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { auth } from "../../../lib/FirebaseConfig";
 
 interface Props {
     listTitle: string
@@ -8,7 +11,9 @@ interface Props {
 
 const Form = (props: Props) => {
     const { listTitle, style, ...rest } = props;
-    const [text, setText] = useState("");
+    const [material, setMaterial] = useRecoilState(materialState);
+    const [ text, setText] = useState('');
+    let newMaterial = {...material};
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -17,16 +22,43 @@ const Form = (props: Props) => {
 
     const handleChange = (event) => {
         setText(event.target.value);
+        if (listTitle == '教材名') {
+            newMaterial = {
+                ...material,
+                title: text,
+            };
+            setMaterial(newMaterial);
+        } else if (listTitle == '著書') {
+            newMaterial = {
+                ...material,
+                author: event.target.value,
+            };
+            setMaterial(newMaterial);
+        } else if (listTitle == '説明文') {
+            newMaterial = {
+                ...material,
+                description: event.target.value,
+            };
+            setMaterial(newMaterial);
+        } else if (listTitle == 'URL') {
+            newMaterial = {
+                ...material,
+                url: event.target.value,
+            };
+            setMaterial(newMaterial);
+        }
+        console.log(newMaterial);
+
     };
 
     return (
         <Container>
             <h3>{ listTitle }</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                 {style == 'textarea' ? (
                     <TextareaContainer {...rest} onChange={handleChange}/>
                     ) : (
-                        <InputContainer type="text" value={text} onChange={handleChange} />
+                    <InputContainer type="text" value={text} onChange={handleChange} />
                 )}
             </form>
 
