@@ -7,6 +7,7 @@ export const materialState = atom({
         title: '',
         author: '',
         description: '',
+        categoryID: '',
         url: '',
         image: '',
     },
