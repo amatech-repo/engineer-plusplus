@@ -53,6 +53,5 @@ const SelectContainer = styled.select `
     border: 1px solid #9A9A9A;
     border-radius: 5px;
     padding: 5px;
-    margin-top: 15px;
 `;
 

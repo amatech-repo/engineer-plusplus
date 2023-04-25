@@ -77,8 +77,7 @@ const InputContainer = styled.input `
     width: 100%;
     border: 1px solid #9A9A9A;
     border-radius: 5px;
-    padding: 10px;
-    margin-top: 15px;
+    padding: 8px;
 `;
 
 const TextareaContainer = styled.textarea `
@@ -86,6 +85,5 @@ const TextareaContainer = styled.textarea `
     height: 75px;
     border: 1px solid #9A9A9A;
     border-radius: 5px;
-    padding: 10px;
-    margin-top: 15px;
+    padding: 8px;
 `;
