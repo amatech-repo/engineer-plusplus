@@ -7,7 +7,7 @@ interface CardProps {
   tags: string[];
 }
 
-const Card = ({ title, totalStudyTime, tag }: CardProps) => {
+const Card = ({ title, totalStudyTime, tags }: CardProps) => {
   return (
     <Wrapper>
       <CardContainer>
@@ -25,7 +25,7 @@ const Card = ({ title, totalStudyTime, tag }: CardProps) => {
           <CardTextBox>
             <CardTitle>{title}</CardTitle>
             <TotalStudyTime>トータル勉強時間: {totalStudyTime} h</TotalStudyTime>
-            <Tag>{tag}</Tag>
+            <Tag>{tags}</Tag>
           </CardTextBox>
         </CardBody>
       </CardContainer>
