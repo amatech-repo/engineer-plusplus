@@ -9,24 +9,6 @@ import Thumbnail from "@/components/Thumbnail";
 
 
 const RegisterMaterials = () => {
-    const [imageFile, setImageFile] = useState<File | null>(null);
-
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
-            setImageFile(event.target.files[0]);
-        }
-    };
-
-    const handleImageUpload = async () => {
-        try {
-            const formData = new FormData();
-            formData.append("imageFile", imageFile as File);
-            const response = await axios.post("/api/upload-image", formData);
-            console.log(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
 
     return (
     <>
