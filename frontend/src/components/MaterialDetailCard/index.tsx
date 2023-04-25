@@ -39,6 +39,9 @@ const SDetailBox = styled.div`
 
 const SDetailImage = styled.img`
   width: 40%;
+  background-color: #f2f2f2;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   height: auto;
   object-fit: cover;
 `;
