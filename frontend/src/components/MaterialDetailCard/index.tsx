@@ -31,8 +31,10 @@ export default MaterialDetailCard;
 
 const SDetailBox = styled.div`
   width: 100%;
-  background-color: #333;
   display: flex;
+  background-color: #333;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const SDetailImage = styled.img`
