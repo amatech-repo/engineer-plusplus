@@ -7,7 +7,7 @@
     "total_study_time": 130,
     "url": "https://example.com/javascript-introduction",
     "category_id": 2,
-    "thumbnail": "https://example.com/images/javascript-intro-thumbnail.jpg",
+    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
     "registered_at": "2022-04-22T10:00:00Z",
     "tags": ["JavaScript", "Web開発", "プログラミング"]
   },
@@ -19,7 +19,7 @@
     "total_study_time": "1.5",
     "url": "https://example.com/react-introduction",
     "category_id": 2,
-    "thumbnail": "https://example.com/images/react-intro-thumbnail.jpg",
+    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
     "registered_at": "2022-04-23T15:30:00Z",
     "tags": ["React", "JavaScript", "Web開発"]
   },
@@ -31,7 +31,7 @@
     "total_study_time": "1.5",
     "url": "https://example.com/python-basics",
     "category_id": 1,
-    "thumbnail": "https://example.com/images/python-basics-thumbnail.jpg",
+    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
     "registered_at": "2022-04-20T09:15:00Z",
     "tags": ["Python", "プログラミング"]
   },
@@ -43,7 +43,7 @@
     "total_study_time": "1.5",
     "url": "https://example.com/react-introduction",
     "category_id": 2,
-    "thumbnail": "https://example.com/images/react-intro-thumbnail.jpg",
+    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
     "registered_at": "2022-04-23T15:30:00Z",
     "tags": ["React", "JavaScript", "Web開発"]
   },
@@ -55,7 +55,7 @@
     "total_study_time": "1.5",
     "url": "https://example.com/react-introduction",
     "category_id": 2,
-    "thumbnail": "https://example.com/images/react-intro-thumbnail.jpg",
+    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
     "registered_at": "2022-04-23T15:30:00Z",
     "tags": ["React", "JavaScript", "Web開発"]
   }
