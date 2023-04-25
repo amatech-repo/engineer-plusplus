@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TimerBox from "./TimerButtons";
 
 interface Props {
   hour: number;
@@ -28,13 +29,15 @@ const SecondCard = ({ second }: any) => (
 );
 
 const TimeCard = ({ hour, minute, second }: Props) => (
-  <CardContainer>
-    <HourCard hour={hour} />
-    <Colon>:</Colon>
-    <MinuteCard minute={minute} />
-    <Colon>:</Colon>
-    <SecondCard second={second} />
-  </CardContainer>
+  <>
+      <CardContainer>
+        <HourCard hour={hour} />
+        <Colon>:</Colon>
+        <MinuteCard minute={minute} />
+        <Colon>:</Colon>
+        <SecondCard second={second} />
+      </CardContainer>
+  </>
 );
 
 export default TimeCard;

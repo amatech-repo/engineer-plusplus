@@ -1,4 +1,4 @@
-import Countup from './Countup';
+import Countup from './TimeCard';
 
 export default {
   title: 'Components/Countup',
