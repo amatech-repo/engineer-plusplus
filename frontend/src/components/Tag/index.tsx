@@ -59,26 +59,6 @@ const Container = styled.div `
     width: 100%;
 `;
 
-const Select = styled.select`
-    width: 100%;
-    height: 100px;
-    border-radius: 5px;
-    border-color: #9a9a9a;
-    padding: 4px;
-`;
-
-const SelectedTags = styled.div`
-    margin-top: 16px;
-
-    & > span {
-        display: inline-block;
-        margin-right: 8px;
-        padding: 4px;
-        background-color: #e0e0e0;
-        border-radius: 5px;
-    }
-`;
-
 const TagListContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -88,7 +68,7 @@ const TagListContainer = styled.div`
 const TagButton = styled.button`
     background-color: ${(props) => (props.selected ? "blue" : "white")};
     color: ${(props) => (props.selected ? "white" : "black")};
-    border: none;
+    border: 1px solid #9A9A9A;
     border-radius: 16px;
     padding: 8px 16px;
     font-size: 16px;
