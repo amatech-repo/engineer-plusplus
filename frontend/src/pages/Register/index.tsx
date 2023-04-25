@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Form from "@/components/Form";
 import SelectCategory from "@/components/SelectCategory";
 import Tag from "@/components/Tag";
+import Thumbnail from "@/components/Thumbnail";
 // import axios from "axios";
 
 
@@ -32,9 +33,7 @@ const RegisterMaterials = () => {
         <Layout>
             <div>
                 <h1>教材登録</h1>
-                <input type="file" onChange={handleImageChange} />
-                <button onClick={handleImageUpload}>Upload</button>
-
+                <Thumbnail />
                 <Form listTitle="教材名" style="input"/>
                 <SelectCategory listTitle="カテゴリ"/>
                 <Form listTitle="著書" style="input"/>
