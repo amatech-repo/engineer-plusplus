@@ -7,6 +7,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../../config/theme';
 import createEmotionCache from '../../config/createEmotionCache';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from '../context/AuthContext';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -25,10 +27,11 @@ export default function MyApp(props: MyAppProps) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <RecoilRoot>
-      <Component {...pageProps} />
-    </RecoilRoot>
+          <AuthProvider>
+            <Component {...pageProps} />
+          </AuthProvider>
+        </RecoilRoot>
       </ThemeProvider>
     </CacheProvider>
-
   );
 }
