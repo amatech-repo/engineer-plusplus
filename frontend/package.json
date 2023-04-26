@@ -30,9 +30,11 @@
     "next": "13.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-markdown": "^8.0.7",
     "reactstrap": "^9.1.9",
     "recoil": "^0.7.7",
     "recoil-persist": "^4.2.0",
+    "remark-gfm": "^3.0.1",
     "styled-components": "^5.3.10",
     "typescript": "5.0.4"
   },
@@ -41,14 +43,18 @@
     "@storybook/addon-essentials": "^7.0.6",
     "@storybook/addon-interactions": "^7.0.6",
     "@storybook/addon-links": "^7.0.6",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/blocks": "^7.0.6",
     "@storybook/nextjs": "^7.0.6",
     "@storybook/react": "^7.0.6",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "autoprefixer": "^10.4.14",
     "chart.js": "^4.2.1",
     "chromatic": "^6.17.3",
     "eslint-plugin-storybook": "^0.6.11",
+    "postcss": "^8.4.23",
     "react-chartjs-2": "^5.2.0",
-    "storybook": "^7.0.6"
+    "storybook": "^7.0.6",
+    "tailwindcss": "^3.3.2"
   }
 }
