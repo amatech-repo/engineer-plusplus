@@ -5,7 +5,6 @@ import { getAuth, signOut } from "firebase/auth";
 const Header = () => {
   // 現在ログインしているユーザーを取得する
   const { currentUser } = useAuth();
-  // console.log(currentUser);
 
   // ログアウトの処理を追記
   const doLogout = () => {

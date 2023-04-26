@@ -3,12 +3,11 @@ import {recoilPersist  } from 'recoil-persist'
 
 const { persistAtom } = recoilPersist()
 
-export const userState = atom({
-  key: 'user',
+export const signInUserState = atom({
+  key: 'auth/signIn',
   default: {
-    id: null,
-    name: '',
-    email: ''
+    uid: null,
+    accessToken: null,
   },
   effects_UNSTABLE: [persistAtom]
 })
