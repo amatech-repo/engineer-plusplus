@@ -15,12 +15,7 @@ const Form = (props: Props) => {
     const [ text, setText] = useState('');
     let newMaterial = {...material};
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log("submitted text: ", text);
-    };
-
-    const handleChange = (event) => {
+    const handleChange = (event: any) => {
         setText(event.target.value);
         if (listTitle == '教材名') {
             newMaterial = {
@@ -54,7 +49,7 @@ const Form = (props: Props) => {
     return (
         <Container>
             <h3>{ listTitle }</h3>
-            <form onSubmit={handleSubmit} >
+            <form>
                 {style == 'textarea' ? (
                     <TextareaContainer {...rest} onChange={handleChange}/>
                     ) : (

@@ -8,7 +8,7 @@ interface Props {
     listTitle: string
 }
 
-const Tag = ({ tag, selected, onClick }) => {
+const Tag = ({ tag, selected, onClick }: any) => {
     return (
         <TagButton selected={selected} onClick={onClick}>
             {tag}
@@ -17,7 +17,7 @@ const Tag = ({ tag, selected, onClick }) => {
 };
 
 
-const TagList = ({ selectedTags, onClickTag }) => {
+const TagList = ({ selectedTags, onClickTag }: any) => {
     return (
         <TagListContainer>
             {mockData.map((tag) => (
@@ -30,13 +30,13 @@ const TagList = ({ selectedTags, onClickTag }) => {
             ))}
         </TagListContainer>
     );
-  };
+};
 
 const TagSelect = (props: Props) => {
     const { listTitle } = props;
     const [selectedTags, setSelectedTags] = useState([]);
 
-    const handleTagClick = (tag) => {
+    const handleTagClick = (tag: any) => {
         setSelectedTags((prevSelectedTags) =>
         prevSelectedTags.includes(tag)
             ? prevSelectedTags.filter((t) => t !== tag)
