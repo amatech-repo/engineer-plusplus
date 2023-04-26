@@ -6,9 +6,9 @@ import { materialState } from "@/store/Auth/material";
 
 const Thumbnail = () => {
 
-    const [thumbnail, setThumbnail] = useState(null);
+    const [thumbnail, setThumbnail] = useState<any>(null);
 
-    const handleThumbnailChange = (event) => {
+    const handleThumbnailChange = (event: any) => {
         const file = event.target.files[0];
         if (file) {
         const reader = new FileReader();

@@ -15,7 +15,7 @@ const CatetoryList = (props: Props) => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const { listTitle } = props
 
-    const handleCategoryChange = (e) => {
+    const handleCategoryChange = (e: any) => {
         setSelectedCategory(e.target.value);
         const newMaterial = {
             ...material,

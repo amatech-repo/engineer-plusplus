@@ -83,7 +83,11 @@ const Nav = styled.nav`
   }
 `;
 
-const BurgerMenu = styled.div`
+interface BurgerMenuProps {
+  showMenu?: boolean;
+}
+
+const BurgerMenu = styled.div<BurgerMenuProps>`
   display: none;
   flex-direction: column;
   cursor: pointer;

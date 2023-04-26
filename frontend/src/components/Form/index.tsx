@@ -15,12 +15,12 @@ const Form = (props: Props) => {
     const [ text, setText] = useState('');
     let newMaterial = {...material};
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         console.log("submitted text: ", text);
     };
 
-    const handleChange = (event) => {
+    const handleChange = (event: any) => {
         setText(event.target.value);
         if (listTitle == '教材名') {
             newMaterial = {
