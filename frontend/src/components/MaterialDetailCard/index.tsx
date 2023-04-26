@@ -19,9 +19,9 @@ const MaterialDetailCard = () => {
             <STag>{tag}</STag>
           ))}
         </STags>
-        <SAuthor>{materialData.author}</SAuthor>
+        {/* <SAuthor>{materialData.author}</SAuthor> */}
         <SDescription>{materialData.description}</SDescription>
-        <SLink>{materialData.url}</SLink>
+        {/* <SLink>{materialData.url}</SLink> */}
       </SDetailTexts>
     </SDetailBox>
   );
@@ -30,29 +30,42 @@ const MaterialDetailCard = () => {
 export default MaterialDetailCard;
 
 const SDetailBox = styled.div`
-  width: 60%;
-  background-color: #333;
+  width: 100%;
   display: flex;
+  background-color: #333;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const SDetailImage = styled.img`
-  width: 30%;
+  width: 40%;
+  background-color: #f2f2f2;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   height: auto;
   object-fit: cover;
 `;
 
 const SDetailTexts = styled.div`
   color: #fff;
-  margin: 16px;
+  margin: 12px 16px;
 `;
 
-const STitle = styled.h1``;
+const STitle = styled.h1`
+  font-size: 1.5rem;
+`;
 
-const SStudyTime = styled.p``;
+const SStudyTime = styled.p`
+  font-size: 0.8rem;
+`;
 
-const SCategory = styled.p``;
+const SCategory = styled.p`
+  font-size: 0.8rem;
+`;
 
-const STags = styled.p``;
+const STags = styled.p`
+  font-size: 0.8rem;
+`;
 
 const STag = styled.span`
   margin: 0 8px;
