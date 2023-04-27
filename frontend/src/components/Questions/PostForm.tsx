@@ -6,21 +6,29 @@ import { addQuestion } from "./add_question";
 interface Question {
   title: string;
   content: string;
+  createdAt: any;
 }
 
 export default function PostForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState();
 
-  const setData = (e: any) => {
+  const setContentData = (e: any) => {
     e.preventDefault();
 
     setContent(e.target.value);
   };
 
+  const setTitleData = (e: any) => {
+    e.preventDefault();
+
+    setTitle(e.target.value);
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const question: Question = await addQuestion(title, content);
+    const createdAt = new Date();
+    const question: Question = await addQuestion(title, content, createdAt);
     console.log("Added question:", question);
     setTitle("");
     setContent("");
@@ -44,6 +52,8 @@ export default function PostForm() {
             <input
               type="text"
               id="post-title"
+              onChange={setTitleData}
+              value={title}
               placeholder="タイトル:わからないことや解決したいことを10文字以上で書きましょう!"
               className="px-5 block mx-auto w-4/5 rounded-lg border h-12 text-xl font-bold focus:outline-none mb-8 shadow-lg"
             />
@@ -55,7 +65,7 @@ export default function PostForm() {
                   placeholder="Markdownで記述"
                   className="markdown-form resize-none w-full h-full border shadow-xl mb-5 rounded-xl focus:outline-none py-4 px-2"
                   value={content}
-                  onChange={setData}
+                  onChange={setContentData}
                 ></textarea>
               </div>
               <div className="w-1/2 m-4">
