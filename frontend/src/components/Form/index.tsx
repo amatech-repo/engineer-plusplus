@@ -65,7 +65,7 @@ const Form = memo((props: Props) => {
                 {style == 'textarea' ? (
                     <TextareaContainer {...rest} onChange={handleChange}/>
                     ) : (
-                    <InputContainer type="text" value={text} onChange={handleChange} style={{ border: isTitleEmpty ? '1px solid red' : 'null' }}/>
+                    <InputContainer type="text" value={text} onChange={handleChange} style={{ border: isTitleEmpty ? '1px solid red' : '1px solid #9A9A9A' }}/>
                 )}
 
             </form>
