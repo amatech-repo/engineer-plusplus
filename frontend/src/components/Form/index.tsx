@@ -24,7 +24,7 @@ const Form = memo((props: Props) => {
         if (listTitle == '教材名') {
             newMaterial = {
                 ...material,
-                title: text,
+                title: event.target.value,
             };
             setMaterial(newMaterial);
 
