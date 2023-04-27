@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import tagsData from "../data/tagMocks.json";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useRecoilState } from "recoil";
+import { materialState } from "@/store/Auth/material";
 
 const mockData = tagsData;
 
@@ -44,6 +46,8 @@ const TagList = ({ selectedTags, onClickTag, isOpen}: any) => {
 };
 
 const SelectedTag = ({ tag, onRemove }: SelectedTagProps & { onRemove: () => void}) => {
+
+
     return (
         <SelectedTagContainer>
             {tag}
@@ -53,12 +57,15 @@ const SelectedTag = ({ tag, onRemove }: SelectedTagProps & { onRemove: () => voi
 };
 
 const SelectedTags = ({ selectedTags, onRemoveTag }: { selectedTags: any[], onRemoveTag: (tag: any) => void }) => {
+    // ここだとちゃんと値が入ってる
+    const [material, setMaterial] = useRecoilState(materialState);
+    console.log('SelectedTags: ', material);
     return (
-    <SelectedTagsContainer>
-        {selectedTags.map((tag) => (
-        <SelectedTag key={tag.id} tag={tag.name} onRemove={ () => onRemoveTag(tag)}/>
-        ))}
-    </SelectedTagsContainer>
+        <SelectedTagsContainer>
+            {selectedTags.map((tag) => (
+            <SelectedTag key={tag.id} tag={tag.name} onRemove={ () => onRemoveTag(tag)}/>
+            ))}
+        </SelectedTagsContainer>
     );
 };
 
@@ -66,8 +73,9 @@ const TagSelect = (props: Props) => {
     const { listTitle } = props;
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [isTagListOpen, setIsTagListOpen] = useState<boolean>(false);
+    const [material, setMaterial] = useRecoilState(materialState);
 
-    const handleTagClick = (tag: string) => {
+    const handleTagClick = (tag: any) => {
         setSelectedTags((prevSelectedTags) =>
         prevSelectedTags.includes(tag)
             ? prevSelectedTags.filter((t) => t !== tag)
@@ -79,6 +87,15 @@ const TagSelect = (props: Props) => {
         setSelectedTags((prevSelectedTags) => prevSelectedTags.filter((t) => t != tag));
     };
 
+    useEffect(() => {
+        setMaterial((prevMaterial) => ({
+            ...prevMaterial,
+            tags: selectedTags,
+        }));
+        // ここだとまだ値が反映されていない
+        console.log('useEffect: ', material);
+    }, [selectedTags, setSelectedTags]);
+
     const handleToggleTagList = () => {
         setIsTagListOpen(!isTagListOpen);
     }
@@ -89,7 +106,6 @@ const TagSelect = (props: Props) => {
             {selectedTags.length > 0 && (
                 <SelectedTags selectedTags={selectedTags} onRemoveTag={handleRemoveTag}/>
             )}
-            {/* <TagList selectedTags={selectedTags} onClickTag={handleTagClick} /> */}
             {isTagListOpen && <TagList selectedTags={selectedTags} onClickTag={handleTagClick}  isOpen={isTagListOpen}/>}
         </Container>
     );
