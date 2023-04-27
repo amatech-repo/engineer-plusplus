@@ -1,11 +1,34 @@
 # engineer-plusplus
 
+## URL一覧
+```md
+http://localhost:8080/ディレクトリ名/ファイル名
+()の中はURLを表しています
+ログイン：http://localhost:8080/auth/login
+新規登録：http://localhost:8080/auth/register
+.
+├── auth
+│   ├── Header.js
+│   ├── forgot_password.js  # リセットパスワード(/auth/forget_password)
+│   ├── login.js            # ログイン(/auth/login)
+│   └── register.js         # 新規登録(/auth/register)
+├── dashboard               # ホーム(/ or /dashboard)
+├── materialDetail          # 教材詳細(/materialDetail/[id])
+│   └── [id].tsx              # id: 現時点(2023/04/27)なんでもいい
+├── questions               # 質問一覧(/questions)
+│   └── index.tsx           # 質問登録(/questions/post)
+├── register                # 教材登録(/register)
+├── timeline                # タイムライン(/timeline)
+└─── profile               # プロフィール(/profile)
+
+```
+
 ## ディレクトリ構成
 ```md
 ./frontend/src
 ├── components        # 各コンポーネント（汎用性の高いもの、ボタンやナビゲーションなど）
 │   ├── Layouts       # レイアウトコンポーネント（ナビゲーションをimportしている）
-│   └── Navigataion  
+│   └── Navigataion
 ├── pages             # 各ページ
 ├── store             # recoilの状態管理を行う（ログイン中かの有無など）
 │   └── Auth
