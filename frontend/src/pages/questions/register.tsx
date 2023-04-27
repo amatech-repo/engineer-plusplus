@@ -1,4 +1,4 @@
-import PostForm from "@/components/Questions/postForm";
+import PostForm from "@/components/Questions/PostForm";
 import Layout from "@/components/Layouts/layout";
 
 const PostQuestion = () => {
