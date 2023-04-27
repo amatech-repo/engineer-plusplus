@@ -7,6 +7,7 @@
     "build": "next build",
     "export": "next export",
     "deploy": "npm run build && npm run export",
+    "postexport": "next-sitemap --config sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "sb": "storybook dev -p 6006",
