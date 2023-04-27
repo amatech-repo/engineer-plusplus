@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { auth } from "../../../lib/FirebaseConfig";
+import { memo } from 'react';
 
 interface Props {
     listTitle: string
     style: string
 }
 
-const Form = (props: Props) => {
+const Form = memo((props: Props) => {
     const { listTitle, style, ...rest } = props;
     const [material, setMaterial] = useRecoilState(materialState);
     const [ text, setText] = useState('');
@@ -59,7 +60,7 @@ const Form = (props: Props) => {
 
         </Container>
     );
-};
+});
 
 export default Form;
 
