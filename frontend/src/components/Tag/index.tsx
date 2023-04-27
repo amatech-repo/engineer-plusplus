@@ -24,14 +24,19 @@ const Tag = ({ tag, selected, onClick }: any) => {
 const TagList = ({ selectedTags, onClickTag }: any) => {
     return (
         <TagListContainer>
-            {mockData.map((tag) => (
-            <Tag
-                key={tag.id}
-                tag={tag.name}
-                selected={selectedTags.includes(tag)}
-                onClick={() => onClickTag(tag)}
-            />
-            ))}
+            {mockData.map((tag) => {
+                if (selectedTags.includes(tag)) {
+                    return null;
+                }
+                return (
+                <Tag
+                    key={tag.id}
+                    tag={tag.name}
+                    selected={false}
+                    onClick={() => onClickTag(tag)}
+                />
+                );
+            })}
         </TagListContainer>
     );
 };
