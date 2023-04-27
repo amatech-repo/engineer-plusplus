@@ -39,7 +39,7 @@ const QuestionsList = () => {
         <Header>
           <h1>My Questions</h1>
           <PostButton>
-            <Link href="/questions/post" style={{ textDecoration: "none", color: "#fff" }}>
+            <Link href="/questions/register" style={{ textDecoration: "none", color: "#fff" }}>
               質問を投稿する
             </Link>
           </PostButton>
