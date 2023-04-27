@@ -16,21 +16,21 @@ export default function PostForm() {
       <div className="h-screen flex flex-col">
         <div className="pl-9 pt-9">
           <a
-            href="/"
+            href="/questions/"
             className="transition duration-500 flex items-center justify-center rounded-full hover:bg-white hover:shadow-xl"
             style={{ width: "50px", height: "50px" }}
           >
             <ArrowBackIosIcon style={{ fontSize: "30px", fontWeight: "bold" }} />
           </a>
         </div>
-        <h1 className="text-center font-bold text-4xl py-10">質問</h1>
+        {/* <h1 className="text-center font-bold text-4xl py-10">質問</h1> */}
         <div className="editor flex-grow flex-shrink">
           <form className="h-full">
             <input
               type="text"
               id="post-title"
-              placeholder="タイトル: わからないことや解決したいことを10文字以上で書きましょう!"
-              className="px-5 block mx-auto w-4/5 rounded-lg border h-14 text-2xl font-bold focus:outline-none mb-8 shadow-lg"
+              placeholder="タイトル:わからないことや解決したいことを10文字以上で書きましょう!"
+              className="px-5 block mx-auto w-4/5 rounded-lg border h-12 text-xl font-bold focus:outline-none mb-8 shadow-lg"
             />
             <div
               className="flex justify-between h-3/5"
@@ -46,7 +46,7 @@ export default function PostForm() {
                   onChange={setData}
                 ></textarea>
               </div>
-              <div className="w-1/2 mx-10">
+              <div className="w-1/2 m-4">
                 <PostPreview markdown={markdown} />
               </div>
             </div>
