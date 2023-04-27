@@ -5,10 +5,11 @@ import Form from "@/components/Form";
 import SelectCategory from "@/components/SelectCategory";
 import Tag from "@/components/Tag";
 import Thumbnail from "@/components/Thumbnail";
+import { memo } from 'react';
 // import axios from "axios";
 
 
-const RegisterMaterials = () => {
+const RegisterMaterials = memo(() => {
 
     return (
     <>
@@ -30,7 +31,7 @@ const RegisterMaterials = () => {
         </Layout>
     </>
     );
-}
+});
 
 export default RegisterMaterials;
 
