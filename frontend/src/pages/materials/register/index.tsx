@@ -39,11 +39,15 @@ const RegisterMaterials = memo(() => {
         );
     };
 
+    const handleSubmit = (event: any) => {
+        event.preventDefault();
+    };
+
     return (
     <>
         <Layout>
-            <div>
-                <h1>教材登録</h1>
+            <div onSubmit={handleSubmit}>
+                <TitleStyle>教材登録</TitleStyle>
                 <Thumbnail />
                 <Form listTitle="教材名" style="input"/>
                 <SelectCategory listTitle="カテゴリ"/>
@@ -63,6 +67,10 @@ const RegisterMaterials = memo(() => {
 });
 
 export default RegisterMaterials;
+
+const TitleStyle = styled.h1 `
+    font-weight: bold;
+`;
 
 const CenteredButtonContainer = styled.div`
     display: flex;
