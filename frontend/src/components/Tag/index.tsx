@@ -23,30 +23,39 @@ const Tag = ({ tag, selected, onClick }: any) => {
     );
 };
 
+const TagList = ({ selectedTags, onClickTag }: any) => {
+  return (
+    <>
+      {mockData.map((tag) => {
+        if (selectedTags.includes(tag)) {
+          return null;
+        }
+        return (
+          <Tag
+            key={tag.id}
+            tag={tag.name}
+            selected={false}
+            onClick={() => onClickTag(tag)}
+          />
+        );
+      })}
+    </>
+  );
+};
 
-const TagList = ({ selectedTags, onClickTag, isOpen}: any) => {
-    if (!isOpen) return null;
-    return (
-        <TagListContainer>
-            {mockData.map((tag) => {
-                if (selectedTags.includes(tag)) {
-                    return null;
-                }
-                return (
-                <Tag
-                    key={tag.id}
-                    tag={tag.name}
-                    selected={false}
-                    onClick={() => onClickTag(tag)}
-                />
-                );
-            })}
-        </TagListContainer>
-    );
+
+const TagListSuggest = ({ selectedTags, onClickTag, isOpen }: any) => {
+  if (!isOpen) return null;
+  return (
+    <SuggestBox>
+      <SuggestBoxList>
+        <TagList selectedTags={selectedTags} onClickTag={onClickTag} />
+      </SuggestBoxList>
+    </SuggestBox>
+  );
 };
 
 const SelectedTag = ({ tag, onRemove }: SelectedTagProps & { onRemove: () => void}) => {
-
 
     return (
         <SelectedTagContainer>
@@ -101,12 +110,12 @@ const TagSelect = (props: Props) => {
     }
 
     return (
-        <Container>
+        <Container isOpen={isTagListOpen}>
             <h3 onClick={handleToggleTagList}>{listTitle} <KeyboardArrowDownIcon fontSize="large"/></h3>
             {selectedTags.length > 0 && (
                 <SelectedTags selectedTags={selectedTags} onRemoveTag={handleRemoveTag}/>
             )}
-            {isTagListOpen && <TagList selectedTags={selectedTags} onClickTag={handleTagClick}  isOpen={isTagListOpen}/>}
+            {isTagListOpen && <TagListSuggest selectedTags={selectedTags} onClickTag={handleTagClick}  isOpen={isTagListOpen}/>}
         </Container>
     );
 };
@@ -116,26 +125,21 @@ export default TagSelect;
 const Container = styled.div `
     margin-top: 47px;
     width: 100%;
-`;
-
-const TagListContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 15px;
+    height: ${(props: any) => (props.isOpen ? '250px' : '10%')};
 `;
 
 const TagButton = styled.button`
-    background-color: ${(props) => (props.selected ? "blue" : "white")};
-    color: ${(props) => (props.selected ? "white" : "black")};
+    background-color: ${(props: any) => (props.selected ? "blue" : "white")};
+    color: ${(props: any) => (props.selected ? "white" : "black")};
     border: 1px solid #9A9A9A;
     border-radius: 16px;
     padding: 8px 16px;
     font-size: 16px;
+    margin: 5px 5px;
     cursor: pointer;
 
     &:hover {
-        background-color: ${(props) => (props.selected ? "blue" : "#b2b2b2c2")};
+        background-color: ${(props: any) => (props.selected ? "blue" : "#b2b2b2c2")};
     }
 `;
 
@@ -163,3 +167,25 @@ const RemoveButton = styled.button`
     cursor: pointer;
     margin-left: 8px;
 `;
+
+const SuggestBox = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 25px;
+`;
+
+const SuggestBoxList = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  min-width: 100px;
+  padding: 25px;
+`;
+
