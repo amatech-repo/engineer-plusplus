@@ -1,14 +1,29 @@
 import { useState } from "react";
 import PostPreview from "./PostPreview";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { addQuestion } from "./add_question";
+
+interface Question {
+  title: string;
+  content: string;
+}
 
 export default function PostForm() {
-  const [markdown, setMarkdown] = useState();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState();
 
   const setData = (e: any) => {
     e.preventDefault();
 
-    setMarkdown(e.target.value);
+    setContent(e.target.value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const question: Question = await addQuestion(title, content);
+    console.log("Added question:", question);
+    setTitle("");
+    setContent("");
   };
 
   return (
@@ -25,29 +40,26 @@ export default function PostForm() {
         </div>
         {/* <h1 className="text-center font-bold text-4xl py-10">質問</h1> */}
         <div className="editor flex-grow flex-shrink">
-          <form className="h-full">
+          <form className="h-full" onSubmit={handleSubmit}>
             <input
               type="text"
               id="post-title"
               placeholder="タイトル:わからないことや解決したいことを10文字以上で書きましょう!"
               className="px-5 block mx-auto w-4/5 rounded-lg border h-12 text-xl font-bold focus:outline-none mb-8 shadow-lg"
             />
-            <div
-              className="flex justify-between h-3/5"
-              style={{ maxHeight: "300px" }}
-            >
+            <div className="flex justify-between h-3/5" style={{ maxHeight: "300px" }}>
               <div className="w-1/2 ml-10">
                 <textarea
                   name="md"
                   id="md"
                   placeholder="Markdownで記述"
                   className="markdown-form resize-none w-full h-full border shadow-xl mb-5 rounded-xl focus:outline-none py-4 px-2"
-                  value={markdown}
+                  value={content}
                   onChange={setData}
                 ></textarea>
               </div>
               <div className="w-1/2 m-4">
-                <PostPreview markdown={markdown} />
+                <PostPreview markdown={content} />
               </div>
             </div>
             <input

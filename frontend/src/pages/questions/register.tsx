@@ -4,9 +4,9 @@ import Layout from "@/components/Layouts/layout";
 const PostQuestion = () => {
   return (
     <>
-    <Layout>
-      <PostForm />
-    </Layout>
+      <Layout>
+        <PostForm />
+      </Layout>
     </>
   );
 };
