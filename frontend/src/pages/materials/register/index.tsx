@@ -1,15 +1,43 @@
 import Layout from "@/components/Layouts/layout";
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "@/components/Form";
 import SelectCategory from "@/components/SelectCategory";
 import Tag from "@/components/Tag";
 import Thumbnail from "@/components/Thumbnail";
 import { memo } from 'react';
-// import axios from "axios";
+import Modal from "react-modal";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { materialState } from "@/store/Auth/material";
 
 
 const RegisterMaterials = memo(() => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const material = useRecoilValue(materialState);
+
+    const handleRegisterButtonClick = () => {
+
+        if (material.title === "" || material.categoryID === "") {
+            alert("教材名とカテゴリは必須項目です。入力してください。");
+        } else {
+            console.log('クリック: ', material);
+            setIsModalOpen(true);
+        }
+    };
+
+    const ModalContent = () => {
+        return (
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={() => setIsModalOpen(false)}
+                style={customStyles}
+                ariaHideApp={false}
+            >
+                <div>登録が完了しました</div>
+                <button onClick={() => setIsModalOpen(false)}>OK</button>
+            </Modal>
+        );
+    };
 
     return (
     <>
@@ -24,7 +52,8 @@ const RegisterMaterials = memo(() => {
                 <Form listTitle="URL" style="input"/>
                 <Tag listTitle="タグ" />
                 <CenteredButtonContainer>
-                    <RegisterButton>登録</RegisterButton>
+                    <RegisterButton onClick={handleRegisterButtonClick}>登録</RegisterButton>
+                    <ModalContent />
                 </CenteredButtonContainer>
 
             </div>
@@ -61,3 +90,23 @@ const RegisterButton = styled.button`
         transform: translateY(2px);
     }
 `;
+
+const customStyles = {
+    overlay: {
+        backgroundColor: "rgba(0, 0, 0, 0.6)",
+    },
+    content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+        backgroundColor: "#F7F7F7",
+        boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.3)",
+        border: "none",
+        borderRadius: "10px",
+        padding: "20px",
+        textAlign: "center",
+    },
+};
