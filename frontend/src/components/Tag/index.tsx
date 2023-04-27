@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import tagsData from "../data/tagMocks.json";
 import { useState } from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const mockData = tagsData;
 
@@ -21,7 +22,8 @@ const Tag = ({ tag, selected, onClick }: any) => {
 };
 
 
-const TagList = ({ selectedTags, onClickTag }: any) => {
+const TagList = ({ selectedTags, onClickTag, isOpen}: any) => {
+    if (!isOpen) return null;
     return (
         <TagListContainer>
             {mockData.map((tag) => {
@@ -63,6 +65,7 @@ const SelectedTags = ({ selectedTags, onRemoveTag }: { selectedTags: any[], onRe
 const TagSelect = (props: Props) => {
     const { listTitle } = props;
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
+    const [isTagListOpen, setIsTagListOpen] = useState<boolean>(false);
 
     const handleTagClick = (tag: string) => {
         setSelectedTags((prevSelectedTags) =>
@@ -76,13 +79,18 @@ const TagSelect = (props: Props) => {
         setSelectedTags((prevSelectedTags) => prevSelectedTags.filter((t) => t != tag));
     };
 
+    const handleToggleTagList = () => {
+        setIsTagListOpen(!isTagListOpen);
+    }
+
     return (
         <Container>
-            <h3>{listTitle}</h3>
+            <h3 onClick={handleToggleTagList}>{listTitle} <KeyboardArrowDownIcon fontSize="large"/></h3>
             {selectedTags.length > 0 && (
                 <SelectedTags selectedTags={selectedTags} onRemoveTag={handleRemoveTag}/>
             )}
-            <TagList selectedTags={selectedTags} onClickTag={handleTagClick} />
+            {/* <TagList selectedTags={selectedTags} onClickTag={handleTagClick} /> */}
+            {isTagListOpen && <TagList selectedTags={selectedTags} onClickTag={handleTagClick}  isOpen={isTagListOpen}/>}
         </Container>
     );
 };
