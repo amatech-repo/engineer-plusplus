@@ -9,6 +9,7 @@ import { memo } from 'react';
 import Modal from "react-modal";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { materialState } from "@/store/Auth/material";
+import addMaterialToFirebase from "./addContent";
 
 
 const RegisterMaterials = memo(() => {
@@ -22,6 +23,7 @@ const RegisterMaterials = memo(() => {
         } else {
             console.log('クリック: ', material);
             setIsModalOpen(true);
+            addMaterialToFirebase(material);
         }
     };
 
