@@ -8,7 +8,7 @@ const Thumbnail = () => {
 
     const [thumbnail, setThumbnail] = useState(null);
 
-    const handleThumbnailChange = (event) => {
+    const handleThumbnailChange = (event: any) => {
         const file = event.target.files[0];
         if (file) {
         const reader = new FileReader();
