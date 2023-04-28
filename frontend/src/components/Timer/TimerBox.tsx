@@ -20,8 +20,6 @@ const CustomModal = ({ isOpen, onClose, time, mid}: any) => {
   const handleSubmit = async (event: any) => {
     // ここでメモの保存処理を行う
     await addStudyRecord(time, memo, mid, uid);
-
-    // event.preventDefault();
     onClose();
   };
 
