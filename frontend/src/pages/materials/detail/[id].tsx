@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getFirestore, doc, getDoc, collection, orderBy, query, addDoc, Timestamp, getDocs } from "firebase/firestore";
@@ -90,8 +90,7 @@ const MaterialDetail = () => {
         <SContainer>
           <MaterialDetailCard />
           <STimerContainer>
-            <TimeCard hour={1} minute={23} second={45} />
-            <TimerBox />
+              <TimerBox />
           </STimerContainer>
         </SContainer>
         <StudyChart />
@@ -116,3 +115,4 @@ const SContainer = styled.div`
 const STimerContainer = styled.div`
   height: 100%;
 `;
+
