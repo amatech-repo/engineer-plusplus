@@ -4,35 +4,41 @@ import { useEffect, useState } from "react";
 import TimeCard from "./TimeCard";
 import Modal from "react-modal";
 import { Button } from "@mui/material";
+import { useRouter } from "next/router";
+import addStudyRecord from "./add_record";
 
-const CustomModal = ({ isOpen, onClose, time }: any) => {
+const CustomModal = ({ isOpen, onClose, time, id}: any) => {
   const [memo, setMemo] = useState("");
 
   const handleMemoChange = (event: any) => {
     setMemo(event.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (event: any) => {
     // ここでメモの保存処理を行う
+    await addStudyRecord(time, memo, id);
+
+    // event.preventDefault();
     onClose();
   };
 
   return (
-      <Modal isOpen={isOpen} >
+      <Modal isOpen={isOpen} ariaHideApp={false}>
         <ModalText>お疲れ様でした！</ModalText>
         <p>勉強時間: {Math.floor(time / 3600)}時間 {Math.floor(time / 60)}分 {time % 60}秒</p>
-        <form onSubmit={handleSubmit}>
+        <form>
           <label>学習メモ</label><br />
           <TextareaContainer onChange={handleMemoChange} />
+          <CustomButton label="記録する" onClick={handleSubmit} />
         </form>
-        <CustomButton label="記録する" onClick={onClose} />
       </Modal>
 
   );
 };
 
 const TimerBox = () => {
+  const router = useRouter();
+  const { id } = router.query;
   const [modal, setModal] = useState(false);
   const [timer, setTimer] = useState(0); // ストップウォッチの時間
   const [isActive, setIsActive] = useState(false); // ストップウォッチが動いているかどうか
@@ -87,7 +93,7 @@ const TimerBox = () => {
         <CustomButton label="pause" onClick={() => handlePause()}/>
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
-        <CustomModal isOpen={modal} onClose={handleModalClose} time={timer}/>
+        <CustomModal isOpen={modal} onClose={handleModalClose} time={timer} id={id}/>
       </Box>
     </>
 
