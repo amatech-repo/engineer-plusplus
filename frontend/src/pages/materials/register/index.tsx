@@ -11,6 +11,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { materialState } from "@/store/Auth/material";
 import addMaterialToFirebase from "./addContent";
 import { signInUserState } from "@/store/Auth/auth";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 const RegisterMaterials = memo(() => {
@@ -48,7 +50,9 @@ const RegisterMaterials = memo(() => {
                 ariaHideApp={false}
             >
                 <div>登録が完了しました</div>
-                <button onClick={() => setIsModalOpen(false)}>OK</button>
+                <Link href="/materials">
+                    <button onClick={() => setIsModalOpen(false)}>OK</button>
+                </Link>
             </Modal>
         );
     };
