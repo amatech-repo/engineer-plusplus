@@ -7,6 +7,11 @@ import {
   Auth,
 } from "firebase/auth";
 
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth"
+ 
+
+
 // .envファイルで設定した環境変数をfirebaseConfigに入れる
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_APIKEY,
@@ -29,3 +34,5 @@ if (typeof window !== "undefined" && !getApps().length) {
 }
 export { firebaseApp, auth, firestore };
 
+firebase.initializeApp(firebaseConfig)
+export default firebase;
