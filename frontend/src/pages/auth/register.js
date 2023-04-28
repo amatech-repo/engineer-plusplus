@@ -1,4 +1,4 @@
-import styles from './app.js'
+
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GithubAuthProvider } from "firebase/auth"  // 追加
 // 現時点で使わないものもあるが今後のことを考えて入れておく 
 import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";  // 追加
