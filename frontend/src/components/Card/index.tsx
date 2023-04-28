@@ -3,24 +3,21 @@ import styled from "styled-components";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 
 interface CardProps {
-  id: string;
+  id: string | number;
   title: string;
   totalStudyTime: number | string;
+  thumbnail: string;
   tags: string[];
 }
 
-const Card = ({ title, totalStudyTime, tags, id }: CardProps) => {
+const Card = ({ id, title, totalStudyTime, tags, thumbnail }: CardProps) => {
   return (
     <Wrapper>
       <Link href={`/materials/detail/${id}`}>
         <CardContainer>
           <CardHeader>
             <CardThumbnail>
-              <CardImage
-                src="https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg"
-                alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ"
-                className="card__image"
-              />
+              <CardImage src={thumbnail} alt="" />
             </CardThumbnail>
           </CardHeader>
           <CardBody>
@@ -28,7 +25,11 @@ const Card = ({ title, totalStudyTime, tags, id }: CardProps) => {
             <CardTextBox>
               <CardTitle>{title}</CardTitle>
               <TotalStudyTime>トータル勉強時間: {totalStudyTime} h</TotalStudyTime>
-              <Tag>{tags}</Tag>
+              <STagList>
+                {tags.map((tag) => (
+                  <Tag>{tag}</Tag>
+                ))}
+              </STagList>
             </CardTextBox>
           </CardBody>
         </CardContainer>
@@ -53,6 +54,7 @@ const Wrapper = styled.div`
 `;
 
 const CardContainer = styled.article`
+  height: 250px;
   background-color: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
   color: #212121;
@@ -92,9 +94,18 @@ const TotalStudyTime = styled.p`
   font-size: 0.75rem;
 `;
 
+const STagList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 const Tag = styled.p`
-  margin: 0;
+  margin: 0 4px 4px 0;
   font-size: 0.75rem;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  padding: 3px 7px;
 `;
 
 const CardTextBox = styled.div`
