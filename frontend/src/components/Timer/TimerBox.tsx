@@ -6,9 +6,12 @@ import Modal from "react-modal";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import addStudyRecord from "./add_record";
+import { useRecoilValue } from "recoil";
+import { signInUserState } from "@/store/Auth/auth";
 
-const CustomModal = ({ isOpen, onClose, time, id}: any) => {
+const CustomModal = ({ isOpen, onClose, time, mid}: any) => {
   const [memo, setMemo] = useState("");
+  const { uid, accessToken } = useRecoilValue(signInUserState);
 
   const handleMemoChange = (event: any) => {
     setMemo(event.target.value);
@@ -16,7 +19,7 @@ const CustomModal = ({ isOpen, onClose, time, id}: any) => {
 
   const handleSubmit = async (event: any) => {
     // ここでメモの保存処理を行う
-    await addStudyRecord(time, memo, id);
+    await addStudyRecord(time, memo, mid, uid);
 
     // event.preventDefault();
     onClose();
@@ -93,7 +96,7 @@ const TimerBox = () => {
         <CustomButton label="pause" onClick={() => handlePause()}/>
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
-        <CustomModal isOpen={modal} onClose={handleModalClose} time={timer} id={id}/>
+        <CustomModal isOpen={modal} onClose={handleModalClose} time={timer} mid={id}/>
       </Box>
     </>
 
