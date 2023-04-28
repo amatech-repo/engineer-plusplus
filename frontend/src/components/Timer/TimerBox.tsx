@@ -9,18 +9,21 @@ import addStudyRecord from "./add_record";
 import { useRecoilValue } from "recoil";
 import { signInUserState } from "@/store/Auth/auth";
 
-const CustomModal = ({ isOpen, onClose, time, mid}: any) => {
+const CustomModal = ({ isOpen, onSubmit, onCancel, time}: any) => {
+  const router = useRouter();
+  const { mid } = router.query;
+  const { uid } = useRecoilValue(signInUserState);
   const [memo, setMemo] = useState("");
-  const { uid, accessToken } = useRecoilValue(signInUserState);
+
 
   const handleMemoChange = (event: any) => {
     setMemo(event.target.value);
   };
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async () => {
     // ここでメモの保存処理を行う
     await addStudyRecord(time, memo, mid, uid);
-    onClose();
+    onSubmit();
   };
 
   return (
@@ -30,24 +33,25 @@ const CustomModal = ({ isOpen, onClose, time, mid}: any) => {
         <form>
           <label>学習メモ</label><br />
           <TextareaContainer onChange={handleMemoChange} />
-          <CustomButton label="記録する" onClick={handleSubmit} />
         </form>
+          <CustomButton label="記録する" onClick={handleSubmit} />
+          <CustomButton label="キャンセル" onClick={onCancel} />
       </Modal>
 
   );
 };
 
 const TimerBox = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false); // モーダルの表示・非表示
   const [timer, setTimer] = useState(0); // ストップウォッチの時間
   const [isActive, setIsActive] = useState(false); // ストップウォッチが動いているかどうか
   const [intervalId, setIntervalId] = useState<number | null>(null);
 
 
-  const handleModalClose = () => {
-    setTimer(0);
+  const handleModalClose = (resetTimer: boolean) => {
+    if (resetTimer) {
+      setTimer(0);
+    }
     setModal(false);
   };
 
@@ -94,7 +98,12 @@ const TimerBox = () => {
         <CustomButton label="pause" onClick={() => handlePause()}/>
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
-        <CustomModal isOpen={modal} onClose={handleModalClose} time={timer} mid={id}/>
+        <CustomModal
+          isOpen={modal}
+          onSubmit={() => handleModalClose(true)}
+          onCancel={() => handleModalClose(false)}
+          time={timer}
+        />
       </Box>
     </>
 
