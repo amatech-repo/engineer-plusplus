@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -29,10 +29,13 @@ type Records = {
   time: number;
 }
 
-const StudyChart: React.FC = () => {
+const StudyChart: React.FC = memo(() => {
   const [studyData, setStudyData] = useState({ labels: [], data: [] });
   const router = useRouter();
   const { id } = router.query;
+  const now = new Date();
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
 
   const options = {
     responsive: true,
@@ -60,6 +63,7 @@ const StudyChart: React.FC = () => {
   useEffect(() => {
     // Firestoreの初期化
     const fetchRecord = async () => {
+
       try {
         const db = getFirestore();
         const docSnap = await getDocs(collection(db, "records"));
@@ -75,22 +79,32 @@ const StudyChart: React.FC = () => {
           };
         });
 
-        const filterdRecords = records.filter((record) => record.mid === id);
+        const filteredRecords = records.filter((record) => record.mid === id);
         // ドキュメントのtimeを秒から時間に変換し、1週目から5週目までの勉強時間を合計
-        const timeData = filterdRecords.flatMap((record) => record.time).map((t: number) => t / 3600); // 秒から時間に変換
+        const timeData = filteredRecords.flatMap((record) => record.time).map((t: number) => t / 3600); // 秒から時間に変換
+        const startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
         const totalTimes: number[] = [];
         for (let i = 0; i < 5; i++) {
-          const startIndex = i * 7;
-          const endIndex = (i + 1) * 7;
-          const weekData = timeData.slice(startIndex, endIndex);
+          const weekStartDate = new Date(startDate);
+          weekStartDate.setDate(startDate.getDate() + i * 7);
+          const weekEndDate = new Date(startDate);
+          weekEndDate.setDate(startDate.getDate() + (i + 1) * 7);
+          const weekData = timeData.filter((t) => {
+            const createdAt = new Date(filteredRecords.find((r) => r.time === t)?.createdAt.seconds || "");
+            return weekStartDate <= createdAt && createdAt <= weekEndDate;
+          });
           const total = weekData.reduce((acc, curr) => acc + curr, 0);
           totalTimes.push(Math.max(total, 0));
 
-          // ラベルとデータを設定
-          const labels = ["1", "2", "3", "4", "5"];
-          setStudyData({ labels, data: totalTimes });
+
           console.log(studyData);
         }
+        // ラベルとデータを設定
+        const labels = ["1", "2", "3", "4", "5"];
+
+        setStudyData({ labels, data: totalTimes });
       } catch (error) {
         console.error(error);
       }
@@ -99,14 +113,14 @@ const StudyChart: React.FC = () => {
     if(id) {
       fetchRecord();
     }
-  }, [studyData]);
+  }, []);
 
 
   const data = {
     labels: studyData.labels,
     datasets: [
       {
-        label: "今月の勉強時間",
+        label: `${month}月の勉強時間`,
         data: studyData.data,
         borderColor: "rgb(128, 164, 255)",
       },
@@ -120,7 +134,7 @@ const StudyChart: React.FC = () => {
       </SContainer>
     </SContainerBg>
   );
-};
+});
 
 export default StudyChart;
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CustomButton from "../Button";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import TimeCard from "./TimeCard";
 import Modal from "react-modal";
 import { Button } from "@mui/material";
@@ -9,9 +9,8 @@ import addStudyRecord from "./add_record";
 import { useRecoilValue } from "recoil";
 import { signInUserState } from "@/store/Auth/auth";
 
-const CustomModal = ({ isOpen, onSubmit, onCancel, time, mid}: any) => {
+const CustomModal = memo(({ isOpen, onSubmit, onCancel, time, mid, uid}: any) => {
   const [memo, setMemo] = useState("");
-  const { uid } = useRecoilValue(signInUserState);
 
   const handleMemoChange = (event: any) => {
     setMemo(event.target.value);
@@ -35,7 +34,7 @@ const CustomModal = ({ isOpen, onSubmit, onCancel, time, mid}: any) => {
       </Modal>
 
   );
-};
+});
 
 const TimerBox = () => {
   const router = useRouter();
@@ -44,6 +43,7 @@ const TimerBox = () => {
   const [timer, setTimer] = useState(0); // ストップウォッチの時間
   const [isActive, setIsActive] = useState(false); // ストップウォッチが動いているかどうか
   const [intervalId, setIntervalId] = useState<number | null>(null);
+  const { uid } = useRecoilValue(signInUserState);
 
   const handleModalClose = (resetTimer: boolean) => {
     if (resetTimer) {
@@ -103,13 +103,14 @@ const TimerBox = () => {
 
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
-        <CustomModal
+        {/* <CustomModal
           isOpen={modal}
           onSubmit={() => handleModalClose(true)}
           onCancel={() => handleModalClose(false)}
           time={timer}
           mid={id}
-        />
+          uid={uid}
+        /> */}
       </Box>
     </>
 
