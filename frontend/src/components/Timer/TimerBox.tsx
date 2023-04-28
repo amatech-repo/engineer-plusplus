@@ -5,12 +5,30 @@ import TimeCard from "./TimeCard";
 import Modal from "react-modal";
 import { Button } from "@mui/material";
 
-const CustomModal = ({ isOpen, onClose }: any) => {
+const CustomModal = ({ isOpen, onClose, time }: any) => {
+  const [memo, setMemo] = useState("");
+
+  const handleMemoChange = (event: any) => {
+    setMemo(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // ここでメモの保存処理を行う
+    onClose();
+  };
+
   return (
-    <Modal isOpen={isOpen} >
-      <p>お疲れ様でした！</p>
-      <Button onClick={onClose}>閉じる</Button>
-    </Modal>
+      <Modal isOpen={isOpen} >
+        <ModalText>お疲れ様でした！</ModalText>
+        <p>勉強時間: {Math.floor(time / 3600)}時間 {Math.floor(time / 60)}分 {time % 60}秒</p>
+        <form onSubmit={handleSubmit}>
+          <label>学習メモ</label><br />
+          <TextareaContainer onChange={handleMemoChange} />
+        </form>
+        <Button onClick={onClose}>閉じる</Button>
+      </Modal>
+
   );
 };
 
@@ -69,7 +87,7 @@ const TimerBox = () => {
         <CustomButton label="pause" onClick={() => handlePause()}/>
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
-        <CustomModal isOpen={modal} onClose={handleModalClose} />
+        <CustomModal isOpen={modal} onClose={handleModalClose} time={timer}/>
       </Box>
     </>
 
@@ -112,3 +130,9 @@ const ModalText = styled.p`
   margin-bottom: 24px;
 `;
 
+const TextareaContainer = styled.textarea `
+  height: 200px;
+  width: 100%;
+  border: 1px solid #9A9A9A;
+  border-radius: 5px;
+`;
