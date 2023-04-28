@@ -7,14 +7,17 @@ import Tag from "@/components/Tag";
 import Thumbnail from "@/components/Thumbnail";
 import { memo } from 'react';
 import Modal from "react-modal";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { materialState } from "@/store/Auth/material";
 import addMaterialToFirebase from "./addContent";
+import { signInUserState } from "@/store/Auth/auth";
 
 
 const RegisterMaterials = memo(() => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const material = useRecoilValue(materialState);
+    const setMaterial = useSetRecoilState(materialState);
+    const { uid, accessToken } = useRecoilValue(signInUserState);
 
     const handleRegisterButtonClick = () => {
 
@@ -23,7 +26,16 @@ const RegisterMaterials = memo(() => {
         } else {
             console.log('クリック: ', material);
             setIsModalOpen(true);
-            addMaterialToFirebase(material);
+            addMaterialToFirebase(material, uid);
+            setMaterial({
+                title: '',
+                author: '',
+                description: '',
+                categoryID: '',
+                url: '',
+                image: '',
+                tags: [''],
+            });
         }
     };
 

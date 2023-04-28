@@ -1,10 +1,12 @@
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { db } from "../../../../lib/FirebaseConfig";
+import { collection, addDoc, Timestamp, getFirestore } from "firebase/firestore";
 
-async function addMaterialToFirebase(material: any) {
+async function addMaterialToFirebase(material: any, uid: any) {
 
     try {
+
+        const db = getFirestore();
         const newMaterialData = {
+            uid: uid,
             title: material.title,
             author: material.author,
             description: material.description,
