@@ -21,7 +21,7 @@ const Thumbnail = () => {
 
     return (
         <Container>
-
+            <h3>サムネイル画像</h3>
             {thumbnail && (
                 <ImgContainer
                 src={thumbnail}

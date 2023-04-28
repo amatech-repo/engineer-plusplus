@@ -9,9 +9,9 @@ interface Props {
 }
 
 const CustomButton = (props: Props) => {
-  const { label } = props;
+  const { label} = props;
 
-  return <Button variant="contained">{label}</Button>;
+  return <Button variant="contained" color="inherit">{label}</Button>;
 };
 
 export default CustomButton;

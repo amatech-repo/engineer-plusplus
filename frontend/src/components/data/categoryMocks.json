@@ -1,22 +1,22 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "name": "書籍"
     },
     {
-        "id": 2,
+        "id": "2",
         "name": "YouTube"
     },
     {
-        "id": 3,
+        "id": "3",
         "name": "Progate"
     },
     {
-        "id": 4,
+        "id": "4",
         "name": "Udemy"
     },
     {
-        "id": 5,
+        "id": "5",
         "name": "その他"
     }
 ]

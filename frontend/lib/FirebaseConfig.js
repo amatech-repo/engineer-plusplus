@@ -1,6 +1,6 @@
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
-//import { getFirestore, Firestore } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 import {
 	getAuth,
 	Auth,
@@ -18,13 +18,13 @@ const firebaseConfig = {
 
 let firebaseApp = FirebaseApp;
 let auth = Auth;
-//let db = getFirestore;
+let db = getFirestore;
 
 // サーバーサイドでレンダリングするときにエラーが起きないようにするための記述
 if (typeof window !== "undefined" && !getApps().length) {
 	firebaseApp = initializeApp(firebaseConfig);
 	auth = getAuth();
-	//db = getFirestore();
+	db = getFirestore();
 }
 //export { firebaseApp, auth, firestore };
-export { firebaseApp, auth };
+export { firebaseApp, auth, db};

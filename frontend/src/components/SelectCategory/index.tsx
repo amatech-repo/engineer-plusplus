@@ -22,6 +22,7 @@ const CatetoryList = (props: Props) => {
             categoryID: e.target.value,
         }
         setMaterial(newMaterial);
+        console.log(newMaterial);
     };
 
     return (
@@ -29,7 +30,7 @@ const CatetoryList = (props: Props) => {
             <h3>{ listTitle }</h3>
             <form>
                 <SelectContainer id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                    <option value="">--選択してください--</option>
+                    <option value="" disabled={selectedCategory !== ''}>--選択してください--</option>
                     {mockData.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
