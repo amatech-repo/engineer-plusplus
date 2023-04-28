@@ -5,7 +5,7 @@ interface Props {
   item: Questions;
 }
 
-type Questions = {
+interface Questions {
   id: string;
   uId: string;
   mId: string;
