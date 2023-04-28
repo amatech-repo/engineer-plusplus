@@ -1,34 +1,38 @@
+import Link from "next/link";
 import styled from "styled-components";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 
 interface CardProps {
+  id: string;
   title: string;
   totalStudyTime: number | string;
   tags: string[];
 }
 
-const Card = ({ title, totalStudyTime, tags }: CardProps) => {
+const Card = ({ title, totalStudyTime, tags, id }: CardProps) => {
   return (
     <Wrapper>
-      <CardContainer>
-        <CardHeader>
-          <CardThumbnail>
-            <CardImage
-              src="https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg"
-              alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ"
-              className="card__image"
-            />
-          </CardThumbnail>
-        </CardHeader>
-        <CardBody>
-          <LiveTvIcon />
-          <CardTextBox>
-            <CardTitle>{title}</CardTitle>
-            <TotalStudyTime>トータル勉強時間: {totalStudyTime} h</TotalStudyTime>
-            <Tag>{tags}</Tag>
-          </CardTextBox>
-        </CardBody>
-      </CardContainer>
+      <Link href={`/materials/detail/${id}`}>
+        <CardContainer>
+          <CardHeader>
+            <CardThumbnail>
+              <CardImage
+                src="https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg"
+                alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ"
+                className="card__image"
+              />
+            </CardThumbnail>
+          </CardHeader>
+          <CardBody>
+            <LiveTvIcon />
+            <CardTextBox>
+              <CardTitle>{title}</CardTitle>
+              <TotalStudyTime>トータル勉強時間: {totalStudyTime} h</TotalStudyTime>
+              <Tag>{tags}</Tag>
+            </CardTextBox>
+          </CardBody>
+        </CardContainer>
+      </Link>
     </Wrapper>
   );
 };
@@ -37,6 +41,15 @@ export default Card;
 
 const Wrapper = styled.div`
   width: 250px;
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    /* background-color: #444; */
+    cursor: pointer;
+  }
 `;
 
 const CardContainer = styled.article`
@@ -44,6 +57,12 @@ const CardContainer = styled.article`
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
   color: #212121;
   text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
 `;
 
 const CardHeader = styled.div``;
