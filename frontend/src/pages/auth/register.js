@@ -117,7 +117,12 @@ export default function Register() {
         Sign up with Github
       </Button>
 
-
+      <div style={{ paddingTop: 20 }}>
+        Already have an account?{' '}
+        <a href="/auth/login">
+          Sign in
+        </a>
+      </div>
 
     </Container>
   )
