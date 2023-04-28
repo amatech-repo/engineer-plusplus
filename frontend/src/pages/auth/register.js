@@ -1,12 +1,18 @@
-import styles from '../../styles/Home.module.css'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-// 現時点で使わないものもあるが今後のことを考えて入れておく
-import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
-import { useState } from 'react';
+import styles from './app.js'
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GithubAuthProvider } from "firebase/auth"  // 追加
+// 現時点で使わないものもあるが今後のことを考えて入れておく 
+import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";  // 追加
+import { useState } from 'react'; // 追加
+import { useRouter } from 'next/router';  // 追加
+import { useAuth } from '../../context/AuthContext';  // 追加
+import { githubProvider, googleProvider } from 'config/authMethods';  // 追加
 
+
+// ユーザー登録ページ
 
 export default function Register() {
-  // useStateでユーザーが入力したメールアドレスとパスワードをemailとpasswordに格納する
+  // ユーザーが入力した値をそれぞれの変数に入れる
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,59 +22,79 @@ export default function Register() {
 
     // Firebaseで用意されているユーザー登録の関数
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // ユーザー登録すると自動的にログインされてuserCredential.userでユーザーの情報を取得できる
-      const user = userCredential.user;
-      // ユーザー登録ができたかどうかをわかりやすくするためのアラート
-      alert( '登録完了！' );
-      console.log( user );
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((userCredential) => {
+        // ユーザー登録すると自動的にログインされてuserCredential.userでユーザーの情報を取得できる
+        const user = userCredential.user;
+        // ユーザー登録ができたかどうかをわかりやすくするためのアラート
+        alert('登録完了！');
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
-    <div className={styles.card}>
-      <h1>新規登録</h1>
-      <div>
-        <Form>
-            <FormGroup>
-              <Label>
-                メールアドレス：
-              </Label>
-              <Input
-                type="email"
-                name="email"
-                style={{ height: 50, fontSize: "1.2rem" }}
-                // onChangeでユーザーが入力した値を取得し、その値をemailに入れる
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>
-                パスワード：
-              </Label>
-              <Input
-                type="password"
-                name="password"
-                style={{ height: 50, fontSize: "1.2rem" }}
-                // onChangeでユーザーが入力した値を取得し、その値をpasswordに入れる
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormGroup>
-            <Button
-                style={{ width: 220 }}
-                color="primary"
-                // 登録ボタンがクリックされたときdoRegister関数が実行されるようにする
-                onClick={()=>{
-                  doRegister();
-                }}
-              >
-              登録
-            </Button>
+    <Container className={`${styles.container} text-center`}>
+
+      <h1>Sign Up to TailAdmin</h1>
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+        <Form style={{ width: '400px' }}>
+          <FormGroup style={{ textAlign: 'left' }}>
+            <Label style={{ textAlign: 'left' }}>
+              Name
+            </Label>
+            <Input
+              type="text"
+              placeholder="Enter your full name"
+              name="username"
+              style={{ height: 50, fontSize: "1.2rem" }}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup style={{ textAlign: 'left' }}>
+            <Label style={{ textAlign: 'left' }}>
+              Email
+            </Label>
+            <Input
+              type="email"
+              placeholder='Enter your email'
+              name="email"
+              style={{ height: 50, fontSize: "1.2rem" }}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup style={{ textAlign: 'left' }}>
+            <Label style={{ textAlign: 'left' }}>
+              Password
+            </Label>
+            <Input
+              type="password"
+              placeholder='Enter your password'
+              name="password"
+              style={{ height: 50, fontSize: "1.2rem" }}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormGroup>
+
         </Form>
       </div>
-    </div>
+      <Button
+        style={{ width: 200 }}
+        color="primary"
+        onClick={() => {
+          doRegister();
+        }}
+      >
+        Create account
+      </Button>
+
+
+
+
+    </Container>
   )
+
 }
