@@ -17,6 +17,24 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const StudyChart: React.FC = () => {
   const options = {
     responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: '週目'
+        },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 10,
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: '時間'
+        },
+      },
+    },
   };
 
   const labels = ["1", "2", "3", "4", "5"];
