@@ -1,17 +1,23 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
 
 interface Props {
   label: string;
-  start?: void;
-  pause?: void;
-  stop?: void;
+  onClick?: () => void;
 }
 
 const CustomButton = (props: Props) => {
-  const { label} = props;
+  const { label, onClick } = props;
 
-  return <Button variant="contained" color="inherit">{label}</Button>;
+  return (
+    onClick
+    ? <Button variant="contained" color="inherit" onClick={() => onClick()}>{label}</Button>
+    : <Button variant="contained" color="inherit">{label}</Button>
+
+  );
+
+
 };
 
 export default CustomButton;

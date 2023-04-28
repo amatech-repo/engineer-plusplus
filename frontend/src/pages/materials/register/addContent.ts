@@ -2,8 +2,7 @@ import { collection, addDoc, setDoc } from "firebase/firestore";
 import { auth, db } from '../../../../lib/FirebaseConfig'
 
 async function addMaterialToFirebase(material: any) {
-    console.log('追加するよ〜');
-    console.log(material.title);
+
     try {
         const newMaterialData = {
             title: material.title,
