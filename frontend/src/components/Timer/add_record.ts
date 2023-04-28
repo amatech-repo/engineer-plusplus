@@ -10,10 +10,12 @@ const addStudyRecord = async (time: string, memo: number, mid: string, uid: stri
             memo: memo,
             createdAt: Date.now()
         }
-            const docRef = await addDoc(collection(db, "records"), newRecordData);
-            console.log("Records added successfully!");
+        await addDoc(collection(db, "records"), newRecordData);
+        console.log("Records added successfully!");
+        alert("学習を記録しました！");
     } catch (error) {
         console.error("Error adding material: ", error);
+        alert("なぜかわからんが記録に失敗してるぞよ");
     }
 }
 
