@@ -1,8 +1,10 @@
-import styled from "styled-components";
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import styled from "styled-components";
 
 const Navigation = () => {
+  const router = useRouter();
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const level = 10; // 自分のレベルを仮に10とする
 
@@ -26,22 +28,24 @@ const Navigation = () => {
         </li>
         <li>
           <Link href="/" passHref>
-            <NavLink activeClassName="active">ホーム</NavLink>
+            <NavLink pathName={router.pathname} href="/">
+              ホーム
+            </NavLink>
           </Link>
         </li>
         <li>
           <Link href="/materials" passHref>
-            <NavLink activeClassName="active">教材一覧</NavLink>
+            <NavLink>教材一覧</NavLink>
           </Link>
         </li>
         <li>
           <Link href="/questions" passHref>
-            <NavLink activeClassName="active">質問</NavLink>
+            <NavLink>質問</NavLink>
           </Link>
         </li>
         <li>
           <Link href="/timeline" passHref>
-            <NavLink activeClassName="active">タイムライン</NavLink>
+            <NavLink>タイムライン</NavLink>
           </Link>
         </li>
         <LogoutButton>sign out</LogoutButton>
@@ -151,16 +155,17 @@ const BurgerMenu = styled.div<BurgerMenuProps>`
   }
 `;
 
-const NavLink = styled.a`
+interface NavLinkProps {
+  pathName?: string;
+  href?: string;
+}
+
+const NavLink = styled.a<NavLinkProps>`
   text-decoration: none;
-  color: white;
+  color: ${({ pathName, href }: NavLinkProps) => (href === pathName ? "#23aaff" : "#fff")};
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: #23aaff;
-  }
-
-  &.active {
     color: #23aaff;
   }
 `;
