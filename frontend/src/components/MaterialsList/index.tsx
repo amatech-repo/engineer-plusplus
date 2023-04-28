@@ -19,7 +19,13 @@ const MaterialList = (props: Props) => {
       <CardContainer>
         {data.map((item) => (
           <ContainerContent key={item.id}>
-            <Card title={item.title} totalStudyTime={item.total_study_time} tags={item.tags} />
+            <Card
+              id={item.id}
+              title={item.title}
+              totalStudyTime={item.total_study_time}
+              tags={item.tags}
+              thumbnail={item.thumbnail}
+            />
           </ContainerContent>
         ))}
       </CardContainer>
