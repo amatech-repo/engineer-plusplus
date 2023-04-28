@@ -6,9 +6,10 @@ import { useAuth } from "@/context/AuthContext";
 import { useRecoilValue } from "recoil";
 
 import { signInUserState } from "@/store/Auth/auth";
-import { getQuestions } from "./questions_function";
 import Layout from "@/components/Layouts/layout";
-import mockData from "@/components/data/questionsMock.json";
+import QuestionsList from "@/components/Questions/QuestionsList";
+import CustomButton from "@/components/Button";
+import Pagination from "@/components/Pagenation";
 
 type Questions = {
   id: string;
@@ -19,10 +20,10 @@ type Questions = {
   createdAt: {
     seconds: number;
     nanoseconds: number;
-  }
+  };
 };
 
-const QuestionsList = () => {
+const Questions = () => {
   const [data, setData] = useState<Questions[] | undefined>();
   const { uid, accessToken } = useRecoilValue(signInUserState);
 
@@ -56,6 +57,7 @@ const QuestionsList = () => {
         });
 
         const filteredQuestions = questions.filter((question) => question.uId === uid);
+        setData(filteredQuestions);
       } catch (error) {
         console.error(error);
       }
@@ -78,41 +80,13 @@ const QuestionsList = () => {
     <Layout>
       <>
         <Header>
-          <h1>My Questions</h1>
-          <PostButton>
-            <Link href="/questions/register" style={{ textDecoration: "none", color: "#fff" }}>
-              質問を投稿する
-            </Link>
-          </PostButton>
+          <h1>質問一覧</h1>
+          <Link href="/questions/register">
+            <CustomButton label="質問を投稿する" />
+          </Link>
         </Header>
-        <List>
-          {currentQuestions &&
-            currentQuestions.map((item: Questions) => (
-              <Card key={item.id}>
-                <Title>{item.title}</Title>
-                <Meta>
-                  {/* TODO: questionsデータに含まれる教材IDをもとに教材の情報を取得する */}
-                  {/* <Text>{data.materialName}</Text>
-                <Text>{data.materialCategory}</Text>
-                <Tags>
-                  {data.materialTags.map((tag, index) => (
-                    <Tag key={index}>{tag}</Tag>
-                  ))}
-                </Tags> */}
-                  <Time>
-                    {new Date(item.createdAt.seconds * 1000 + item.createdAt.nanoseconds / 1000000).toLocaleString()}
-                  </Time>
-                </Meta>
-              </Card>
-            ))}
-        </List>
-        <Pagination>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <PageButton key={page} onClick={() => handlePageChange(page)} active={currentPage === page}>
-              {page}
-            </PageButton>
-          ))}
-        </Pagination>
+        <QuestionsList data={currentQuestions} />
+        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
       </>
     </Layout>
   );
@@ -125,94 +99,4 @@ const Header = styled.header`
   margin-bottom: 1.5rem;
 `;
 
-const PostButton = styled.button`
-  background-color: #4b9ce2;
-  color: #fff;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #3476b3;
-  }
-`;
-
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const Card = styled.li`
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-`;
-
-const Title = styled.h2`
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-`;
-
-const Text = styled.p`
-  margin-bottom: 0.5rem;
-`;
-
-const Meta = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 1rem;
-  color: #999;
-`;
-
-const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 1rem;
-`;
-
-const Tag = styled.span`
-  background-color: #f0f0f0;
-  color: #555;
-  font-size: 0.8rem;
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-`;
-
-const Time = styled.p`
-  font-size: 0.8rem;
-  margin-bottom: 0;
-  margin-left: auto;
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-`;
-
-const PageButton = styled.button<{ active: boolean }>`
-  background-color: ${(props) => (props.active ? "#4b9ce2" : "#f0f0f0")};
-  color: ${(props) => (props.active ? "#fff" : "#555")};
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #4b9ce2;
-    color: #fff;
-  }
-`;
-
-export default QuestionsList;
+export default Questions;
