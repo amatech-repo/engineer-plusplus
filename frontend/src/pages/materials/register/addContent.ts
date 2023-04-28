@@ -1,4 +1,4 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../../../../lib/FirebaseConfig";
 
 async function addMaterialToFirebase(material: any) {
@@ -13,7 +13,7 @@ async function addMaterialToFirebase(material: any) {
             image: material.image,
             tags: material.tags,
             totalStudyTime: 0,
-            createdDate: Date.now()
+            createdAt: Timestamp .now()
         }
         const docRef = await addDoc(collection(db, "materials"), newMaterialData);
         console.log("Material added successfully!", docRef.id);
