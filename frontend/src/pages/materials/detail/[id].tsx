@@ -12,37 +12,6 @@ import { Button } from "reactstrap";
 
 const MaterialDetail = () => {
 
-  const [timer, setTimer] = useState(0); // ストップウォッチの時間
-  const [isActive, setIsActive] = useState(false); // ストップウォッチが動いているかどうか
-  const [setIntervalID, setSetIntervalID] = useState(null);
-
-  useEffect(() => {
-    let intervalId: any = null;
-    if (isActive) {
-      intervalId = setInterval(() => {
-        setTimer((timer) => timer + 1);
-      }, 1000);
-      setSetIntervalID(intervalId);
-    } else if (!isActive && timer !== 0) {
-      clearInterval(intervalId);
-    }
-    return () => clearInterval(intervalId);
-  }, [isActive, timer]);
-
-  const handleStart = () => {
-    setIsActive(true);
-  };
-
-  const handleStop = () => {
-    setIsActive(false);
-    setTimer(0);
-    clearInterval(setIntervalID);
-  };
-
-  const handlePause = () => {
-    setIsActive(false);
-    clearInterval(setIntervalID);
-  }
 
   return (
     <Layout>
@@ -50,24 +19,7 @@ const MaterialDetail = () => {
         <SContainer>
           <MaterialDetailCard />
           <STimerContainer>
-            <TimeCard hour={Math.floor(timer / 3600)} minute={Math.floor(timer / 60)} second={timer % 60} />
-            {!isActive && (
-              <Button variant="contained" color="inherit" onClick={handleStart}>
-                START
-              </Button>
-            )}
-
-            {isActive && (
-              <Button variant="contained" color="inherit" onClick={handlePause}>
-                PAUSE
-              </Button>
-            )}
-
-            {timer > 0 && (
-              <Button variant="contained" color="inherit" onClick={handleStop}>
-                STOP
-              </Button>
-            )}
+              <TimerBox />
           </STimerContainer>
         </SContainer>
         <StudyChart />
