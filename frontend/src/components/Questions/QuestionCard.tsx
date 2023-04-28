@@ -15,31 +15,37 @@ interface Questions {
     seconds: number;
     nanoseconds: number;
   };
-}
+};
 
 const QuestionCard = ({ item }: Props) => {
   return (
-    <Card key={item.id}>
-      <Link
-        href={`/questions/detail/${item.id}`}
-        style={{
-          textDecoration: "none",
-        }}
-      >
-        <Title>{item.title}</Title>
-        <Meta>
-          {/* TODO: questionsデータに含まれる教材IDをもとに教材の情報を取得する */}
-          {/* <Text>{data.materialName}</Text>
+    <>
+      {item && (
+        <Card key={item.id}>
+          <Link
+            href={`/questions/detail/${item.id}`}
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <Title>{item.title}</Title>
+            <Meta>
+              {/* TODO: questionsデータに含まれる教材IDをもとに教材の情報を取得する */}
+              {/* <Text>{data.materialName}</Text>
                 <Text>{data.materialCategory}</Text>
                 <Tags>
                   {data.materialTags.map((tag, index) => (
                     <Tag key={index}>{tag}</Tag>
                   ))}
                 </Tags> */}
-          <Time>{new Date(item.createdAt.seconds * 1000 + item.createdAt.nanoseconds / 1000000).toLocaleString()}</Time>
-        </Meta>
-      </Link>
-    </Card>
+              <Time>
+                {new Date(item.createdAt.seconds * 1000 + item.createdAt.nanoseconds / 1000000).toLocaleString()}
+              </Time>
+            </Meta>
+          </Link>
+        </Card>
+      )}
+    </>
   );
 };
 

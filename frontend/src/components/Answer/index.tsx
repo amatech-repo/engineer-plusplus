@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Timestamp } from "firebase/firestore";
 import PostPreview from "@/components/Questions/PostPreview";
 
 interface Answers {
@@ -24,9 +24,7 @@ const AnswerList = ({ answers }: Props) => {
         <Answer key={answer.id}>
           <PostPreview markdown={answer.content} />
           <AnswerCreatedAt>
-            {new Date(
-              answer.createdAt.seconds * 1000 + answer.createdAt.nanoseconds / 1000000
-            ).toLocaleString()}
+            {new Date(answer.createdAt.seconds * 1000 + answer.createdAt.nanoseconds / 1000000).toLocaleString()}
           </AnswerCreatedAt>
         </Answer>
       ))}
