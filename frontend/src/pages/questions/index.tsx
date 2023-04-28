@@ -1,37 +1,78 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import styled from "styled-components";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { useAuth } from "@/context/AuthContext";
+import { useRecoilValue } from "recoil";
 
+import { signInUserState } from "@/store/Auth/auth";
+import { getQuestions } from "./questions_function";
 import Layout from "@/components/Layouts/layout";
 import mockData from "@/components/data/questionsMock.json";
-import Link from "next/link";
 
-type Question = {
-  id: number;
+type Questions = {
+  id: string;
+  uId: string;
+  mId: string;
   title: string;
-  materialName: string;
-  materialCategory: string;
-  materialTags: string[];
-  createdAt: string;
-};
-
-type Props = {
-  questions: Question[];
+  content: string;
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  }
 };
 
 const QuestionsList = () => {
+  const [data, setData] = useState<Questions[] | undefined>();
+  const { uid, accessToken } = useRecoilValue(signInUserState);
+
   const questionsPerPage = 10; // ページあたりの質問の数
   const [currentPage, setCurrentPage] = useState(1); // 現在のページ
+  const [totalPages, setTotalPages] = useState(1); // 総ページ数
+  const [currentQuestions, setCurrentQuestions] = useState<Questions[]>([]); // 現在のページに表示する質問
 
-  const questions = mockData;
-
-  const totalPages = Math.ceil(questions.length / questionsPerPage); // 総ページ数
   const startIndex = (currentPage - 1) * questionsPerPage; // 現在のページの最初の質問のインデックス
   const endIndex = startIndex + questionsPerPage; // 現在のページの最後の質問のインデックス
-  const currentQuestions = questions.slice(startIndex, endIndex); // 現在のページに表示する質問
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const db = getFirestore();
+        const querySnapshot = await getDocs(collection(db, "questions"));
+        const questions = querySnapshot.docs.map((doc) => {
+          const data = doc.data() as Questions;
+          return {
+            id: doc.id,
+            uId: data.uId,
+            mId: data.mId,
+            title: data.title,
+            content: data.content,
+            createdAt: data.createdAt,
+          };
+        });
+
+        const filteredQuestions = questions.filter((question) => question.uId === uid);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      const totalPages = Math.ceil(data.length / questionsPerPage);
+      setTotalPages(totalPages);
+      const currentQuestions = data.slice(startIndex, endIndex);
+      setCurrentQuestions(currentQuestions);
+    }
+
+    console.log(currentQuestions);
+  }, [data, currentPage]);
 
   return (
     <Layout>
@@ -45,21 +86,25 @@ const QuestionsList = () => {
           </PostButton>
         </Header>
         <List>
-          {currentQuestions.map((question) => (
-            <Card key={question.id}>
-              <Title>{question.title}</Title>
-              <Meta>
-                <Text>{question.materialName}</Text>
-                <Text>{question.materialCategory}</Text>
+          {currentQuestions &&
+            currentQuestions.map((item: Questions) => (
+              <Card key={item.id}>
+                <Title>{item.title}</Title>
+                <Meta>
+                  {/* TODO: questionsデータに含まれる教材IDをもとに教材の情報を取得する */}
+                  {/* <Text>{data.materialName}</Text>
+                <Text>{data.materialCategory}</Text>
                 <Tags>
-                  {question.materialTags.map((tag, index) => (
+                  {data.materialTags.map((tag, index) => (
                     <Tag key={index}>{tag}</Tag>
                   ))}
-                </Tags>
-                <Time>{question.createdAt}</Time>
-              </Meta>
-            </Card>
-          ))}
+                </Tags> */}
+                  <Time>
+                    {new Date(item.createdAt.seconds * 1000 + item.createdAt.nanoseconds / 1000000).toLocaleString()}
+                  </Time>
+                </Meta>
+              </Card>
+            ))}
         </List>
         <Pagination>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
