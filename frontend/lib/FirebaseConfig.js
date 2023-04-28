@@ -1,6 +1,7 @@
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
-import { getFirestore, Firestore } from 'firebase/firestore'
+
+import { getFirestore } from 'firebase/firestore'
 import {
 	getAuth,
 	Auth,
@@ -27,4 +28,5 @@ if (typeof window !== "undefined" && !getApps().length) {
 	db = getFirestore();
 }
 //export { firebaseApp, auth, firestore };
-export { firebaseApp, auth, db };
+export { firebaseApp, auth, db};
+

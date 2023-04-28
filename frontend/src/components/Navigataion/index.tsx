@@ -1,9 +1,12 @@
-import styled from "styled-components";
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import styled from "styled-components";
 
 const Navigation = () => {
+  const router = useRouter();
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const level = 10; // 自分のレベルを仮に10とする
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -18,17 +21,34 @@ const Navigation = () => {
       </BurgerMenu>
       <ul className={showMenu ? "show" : ""}>
         <li>
-          <Link href="/">ホーム</Link>
+          <LogoContainer>
+            <Logo src="/enginner-plus-plus.png" alt="Enginner++" />
+            <Level>Lv. ???</Level>
+          </LogoContainer>
         </li>
         <li>
-          <Link href="/bookslist">教材一覧</Link>
+          <Link href="/" passHref>
+            <NavLink pathName={router.pathname} href="/">
+              ホーム
+            </NavLink>
+          </Link>
         </li>
         <li>
-          <Link href="/questions">質問</Link>
+          <Link href="/materials" passHref>
+            <NavLink>教材一覧</NavLink>
+          </Link>
         </li>
         <li>
-          <Link href="/timeline">タイムライン</Link>
+          <Link href="/questions" passHref>
+            <NavLink>質問</NavLink>
+          </Link>
         </li>
+        <li>
+          <Link href="/timeline" passHref>
+            <NavLink>タイムライン</NavLink>
+          </Link>
+        </li>
+        <LogoutButton>sign out</LogoutButton>
       </ul>
     </Nav>
   );
@@ -42,7 +62,7 @@ const Nav = styled.nav`
   left: 0;
   height: 100%;
   width: 250px;
-  background-color: black;
+  background-color: #333;
   color: white;
   display: flex;
   flex-direction: column;
@@ -58,6 +78,7 @@ const Nav = styled.nav`
 
   li {
     margin: 10px 0;
+    font-weight: bold;
   }
 
   a {
@@ -72,7 +93,7 @@ const Nav = styled.nav`
 
     ul {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       display: none;
       margin-top: 50px;
     }
@@ -81,6 +102,23 @@ const Nav = styled.nav`
       display: flex;
     }
   }
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+`;
+
+const Logo = styled.img`
+  height: 70px;
+  width: 70px;
+`;
+
+const Level = styled.span`
+  font-size: 14px;
+  margin-top: 5px;
 `;
 
 interface BurgerMenuProps {
@@ -105,8 +143,7 @@ const BurgerMenu = styled.div<BurgerMenuProps>`
   }
 
   div:nth-child(1) {
-    transform: ${({ showMenu }) =>
-      showMenu ? "rotate(45deg) translate(5px, 5px)" : "rotate(0)"};
+    transform: ${({ showMenu }) => (showMenu ? "rotate(45deg) translate(5px, 5px)" : "rotate(0)")};
   }
 
   div:nth-child(2) {
@@ -114,7 +151,41 @@ const BurgerMenu = styled.div<BurgerMenuProps>`
   }
 
   div:nth-child(3) {
-    transform: ${({ showMenu }) =>
-      showMenu ? "rotate(-45deg) translate(5px, -5px)" : "rotate(0)"};
+    transform: ${({ showMenu }) => (showMenu ? "rotate(-45deg) translate(5px, -5px)" : "rotate(0)")};
+  }
+`;
+
+interface NavLinkProps {
+  pathName?: string;
+  href?: string;
+}
+
+const NavLink = styled.a<NavLinkProps>`
+  text-decoration: none;
+  color: ${({ pathName, href }: NavLinkProps) => (href === pathName ? "#23aaff" : "#fff")};
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #23aaff;
+  }
+`;
+
+const LogoutButton = styled.button`
+  margin-top: 2rem;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  display: block;
+  width: 95%;
+  text-align: center;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: white;
+    color: black;
   }
 `;

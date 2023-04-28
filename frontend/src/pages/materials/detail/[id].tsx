@@ -7,16 +7,19 @@ import MaterialDetailCard from "@/components/MaterialDetailCard";
 import TimeCard from "@/components/Timer/TimeCard";
 import TimerBox from "@/components/Timer/TimerBox";
 import StudyChart from "@/components/Chart";
+import { SetStateAction, useEffect, useState } from "react";
+import { Button } from "reactstrap";
 
 const MaterialDetail = () => {
+
+
   return (
     <Layout>
       <div>
         <SContainer>
           <MaterialDetailCard />
           <STimerContainer>
-            <TimeCard hour={1} minute={23} second={45} />
-            <TimerBox />
+              <TimerBox />
           </STimerContainer>
         </SContainer>
         <StudyChart />
@@ -36,3 +39,4 @@ const SContainer = styled.div`
 const STimerContainer = styled.div`
   height: 100%;
 `
+
