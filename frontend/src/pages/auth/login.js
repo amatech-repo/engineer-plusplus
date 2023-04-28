@@ -72,29 +72,31 @@ export default function Login() {
   // パスワードを忘れた場合のリンクタグを追加
   return (
     <div className={styles.card}>
-      <h1>ログイン</h1>
+      <h1>Sign In to TailAdmin </h1>
       <Header />
       <div style={{ paddingBottom: "1rem" }}>
         <Form>
           <FormGroup>
             <Label>
-              メールアドレス：
+              Email
             </Label>
             <Input
               type="email"
+              placeholder="Enter your email"
               name="email"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width:300, fontSize: "1.2rem" }}
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormGroup>
           <FormGroup>
             <Label>
-              パスワード：
+              Password
             </Label>
             <Input
               type="password"
+              placeholder="6+ characters, 1 Capital letter"
               name="password"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width:300, fontSize: "1.2rem" }}
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
@@ -105,7 +107,7 @@ export default function Login() {
               doLogin();
             }}
           >
-            ログイン
+            Sign In
           </Button>
         </Form>
       </div>
@@ -119,8 +121,9 @@ export default function Login() {
 
           }}
         >
-          Googleで登録
+          Sign in with Google
         </Button>
+        <br /><br />
         <Button
           style={{ width: 220 }}
           color="primary"
@@ -129,22 +132,24 @@ export default function Login() {
             handleGithubSignIn();
           }}
         >
-          Githubで登録
+          Sign in with Github
         </Button>
-      </div>
-      <div>
-
-        <Link
-          href="/auth/register">
-          新規登録はこちら
-        </Link>
+        <br /><br />
       </div>
       <div>
         <Link
           href="/auth/forgot_password">
-          パスワードを忘れた場合
+          Forget Password?
         </Link>
       </div>
+      <div>
+        <Link
+          href="/auth/register">
+          Don't have an account? Sign Up
+        </Link>
+      </div>
+
+
     </div>
   )
 }
