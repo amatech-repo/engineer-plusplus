@@ -27,18 +27,27 @@ export default function PostForm({ mId }: Props) {
 
   const setContentData = (e: any) => {
     e.preventDefault();
-
     setContent(e.target.value);
   };
 
   const setTitleData = (e: any) => {
     e.preventDefault();
-
     setTitle(e.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // タイトルが10文字以上でない場合は送信を拒否する
+    if (title.length < 5) {
+      return;
+    }
+
+    // コンテンツが空文字列の場合は送信を拒否する
+    if (!content.trim()) {
+      return;
+    }
+
     const createdAt = Timestamp.now();
     const updatedAt = Timestamp.now();
     const question: Question = await addQuestion({
@@ -66,7 +75,6 @@ export default function PostForm({ mId }: Props) {
             <ArrowBackIosIcon style={{ fontSize: "30px", fontWeight: "bold" }} />
           </a>
         </div>
-        {/* <h1 className="text-center font-bold text-4xl py-10">質問</h1> */}
         <div className="editor flex-grow flex-shrink">
           <form className="h-full" onSubmit={handleSubmit}>
             <input
@@ -76,6 +84,8 @@ export default function PostForm({ mId }: Props) {
               value={title}
               placeholder="タイトル:わからないことや解決したいことを10文字以上で書きましょう!"
               className="px-5 block mx-auto w-4/5 rounded-lg border h-12 text-xl font-bold focus:outline-none mb-8 shadow-lg"
+              minLength={5} // 最小文字数の指定
+              required // 入力必須の指定
             />
             <div className="flex justify-between h-3/5" style={{ maxHeight: "300px" }}>
               <div className="w-1/2 ml-10">
@@ -85,6 +95,7 @@ export default function PostForm({ mId }: Props) {
                   placeholder="Markdownで記述"
                   className="markdown-form resize-none w-full h-full border shadow-xl mb-5 rounded-xl focus:outline-none py-4 px-2"
                   value={content}
+                  required // 入力必須の指定
                   onChange={setContentData}
                 ></textarea>
               </div>
