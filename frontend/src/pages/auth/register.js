@@ -100,7 +100,22 @@ export default function Register() {
       >
         Create account
       </Button>
-
+      <br /><br />
+      <Button
+        style={{ width: 200 }}
+        color="primary"
+        onClick={() => OnClick(googleProvider)}
+      >
+        Sign up with Google
+      </Button>
+      <br /><br />
+      <Button
+        style={{ width: 200 }}
+        color="primary"
+        onClick={() => OnClick(githubProvider)}
+      >
+        Sign up with Github
+      </Button>
 
 
 
