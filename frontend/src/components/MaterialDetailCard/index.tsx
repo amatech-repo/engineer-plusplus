@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import Image from "next/image";
 import data from "../data/materialsMock.json";
 
 const MaterialDetailCard = () => {

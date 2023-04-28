@@ -7,8 +7,8 @@
     "total_study_time": 130,
     "url": "https://example.com/javascript-introduction",
     "category_id": 2,
-    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
-    "registered_at": "2022-04-22T10:00:00Z",
+    "thumbnail": "https://images.unsplash.com/photo-1590004828948-09db7606e5ac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=700&ixid=MnwxfDB8MXxyYW5kb218MHx8ZnJ1aXR8fHx8fHwxNjgyNjYwODIw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=900",
+    "createdAt": "2022-04-22T10:00:00Z",
     "tags": ["JavaScript", "Web開発", "プログラミング"]
   },
   {
@@ -19,8 +19,8 @@
     "total_study_time": "1.5",
     "url": "https://example.com/react-introduction",
     "category_id": 2,
-    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
-    "registered_at": "2022-04-23T15:30:00Z",
+    "thumbnail": "https://images.unsplash.com/photo-1590004828948-09db7606e5ac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=700&ixid=MnwxfDB8MXxyYW5kb218MHx8ZnJ1aXR8fHx8fHwxNjgyNjYwODIw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=900",
+    "createdAt": "2022-04-23T15:30:00Z",
     "tags": ["React", "JavaScript", "Web開発"]
   },
   {
@@ -31,8 +31,8 @@
     "total_study_time": "1.5",
     "url": "https://example.com/python-basics",
     "category_id": 1,
-    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
-    "registered_at": "2022-04-20T09:15:00Z",
+    "thumbnail": "https://images.unsplash.com/photo-1590004828948-09db7606e5ac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=700&ixid=MnwxfDB8MXxyYW5kb218MHx8ZnJ1aXR8fHx8fHwxNjgyNjYwODIw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=900",
+    "createdAt": "2022-04-20T09:15:00Z",
     "tags": ["Python", "プログラミング"]
   },
   {
@@ -43,8 +43,8 @@
     "total_study_time": "1.5",
     "url": "https://example.com/react-introduction",
     "category_id": 2,
-    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
-    "registered_at": "2022-04-23T15:30:00Z",
+    "thumbnail": "https://images.unsplash.com/photo-1590004828948-09db7606e5ac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=700&ixid=MnwxfDB8MXxyYW5kb218MHx8ZnJ1aXR8fHx8fHwxNjgyNjYwODIw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=900",
+    "createdAt": "2022-04-23T15:30:00Z",
     "tags": ["React", "JavaScript", "Web開発"]
   },
   {
@@ -55,8 +55,8 @@
     "total_study_time": "1.5",
     "url": "https://example.com/react-introduction",
     "category_id": 2,
-    "thumbnail": "https://shibajuku.net/wp/wp-content/uploads/2020/02/seigiT.jpg",
-    "registered_at": "2022-04-23T15:30:00Z",
+    "thumbnail": "https://images.unsplash.com/photo-1590004828948-09db7606e5ac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=700&ixid=MnwxfDB8MXxyYW5kb218MHx8ZnJ1aXR8fHx8fHwxNjgyNjYwODIw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=900",
+    "createdAt": "2022-04-23T15:30:00Z",
     "tags": ["React", "JavaScript", "Web開発"]
   }
 ]
