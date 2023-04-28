@@ -78,7 +78,17 @@ export default function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
-
+          <FormGroup style={{ textAlign: 'left' }}>
+            <Label style={{ textAlign: 'left' }}>
+              Re-enter Password
+            </Label>
+            <Input
+              type="password"
+              placeholder='Re-enter your password'
+              name="password"
+              style={{ height: 50, fontSize: "1.2rem" }}
+            />
+          </FormGroup>
         </Form>
       </div>
       <Button
