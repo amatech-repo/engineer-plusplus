@@ -1,8 +1,9 @@
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from 'firebase/firestore'
 import {
 	getAuth,
+	GoogleAuthProvider,
+	GithubAuthProvider,
 	Auth,
 } from "firebase/auth";
 
@@ -23,8 +24,13 @@ let db = getFirestore;
 // サーバーサイドでレンダリングするときにエラーが起きないようにするための記述
 if (typeof window !== "undefined" && !getApps().length) {
 	firebaseApp = initializeApp(firebaseConfig);
-	auth = getAuth();
-	db = getFirestore();
+	auth = getAuth(firebaseApp);
+	auth.useDeviceLanguage();
+	db = getFirestore(firebaseApp);
 }
-//export { firebaseApp, auth, firestore };
-export { firebaseApp, auth, db};
+
+// Google認証とGithub認証のプロバイダーを作成
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
+
+export { firebaseApp, auth, db, googleProvider, githubProvider };
