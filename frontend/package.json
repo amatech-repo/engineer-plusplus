@@ -12,6 +12,7 @@
     "lint": "next lint",
     "sb": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "type": "module",
     "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
@@ -66,5 +67,6 @@
     "react-chartjs-2": "^5.2.0",
     "storybook": "^7.0.6",
     "tailwindcss": "^3.3.2"
+    
   }
 }
