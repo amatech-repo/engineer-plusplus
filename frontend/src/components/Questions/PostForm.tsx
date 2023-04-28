@@ -1,17 +1,29 @@
 import { useState } from "react";
-import PostPreview from "./PostPreview";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { Timestamp } from "firebase/firestore";
+import { useRecoilValue } from "recoil";
+
+import { signInUserState } from "@/store/Auth/auth";
+import PostPreview from "./PostPreview";
 import { addQuestion } from "./add_question";
 
 interface Question {
+  mId: string | string[];
+  uId: string;
   title: string;
-  content: string;
-  createdAt: any;
+  content: string | undefined;
+  updatedAt: Timestamp;
+  createdAt: Timestamp;
 }
 
-export default function PostForm() {
+interface Props {
+  mId: string | string[];
+}
+
+export default function PostForm({ mId }: Props) {
+  const { uid, accessToken } = useRecoilValue(signInUserState);
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
 
   const setContentData = (e: any) => {
     e.preventDefault();
@@ -27,8 +39,16 @@ export default function PostForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const createdAt = new Date();
-    const question: Question = await addQuestion(title, content, createdAt);
+    const createdAt = Timestamp.now();
+    const updatedAt = Timestamp.now();
+    const question: Question = await addQuestion({
+      mId,
+      uId: uid,
+      title,
+      content,
+      createdAt,
+      updatedAt,
+    });
     console.log("Added question:", question);
     setTitle("");
     setContent("");

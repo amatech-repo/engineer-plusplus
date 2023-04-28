@@ -40,7 +40,7 @@ const Navigation = () => {
         </li>
         <li>
           <Link href="/questions" passHref>
-            <NavLink>質問</NavLink>
+            <NavLink>質問一覧</NavLink>
           </Link>
         </li>
         <li>
