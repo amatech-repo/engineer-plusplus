@@ -9,19 +9,15 @@ import addStudyRecord from "./add_record";
 import { useRecoilValue } from "recoil";
 import { signInUserState } from "@/store/Auth/auth";
 
-const CustomModal = ({ isOpen, onSubmit, onCancel, time}: any) => {
-  const router = useRouter();
-  const { mid } = router.query;
-  const { uid } = useRecoilValue(signInUserState);
+const CustomModal = ({ isOpen, onSubmit, onCancel, time, mid}: any) => {
   const [memo, setMemo] = useState("");
-
+  const { uid } = useRecoilValue(signInUserState);
 
   const handleMemoChange = (event: any) => {
     setMemo(event.target.value);
   };
 
   const handleSubmit = async () => {
-    // ここでメモの保存処理を行う
     await addStudyRecord(time, memo, mid, uid);
     onSubmit();
   };
@@ -42,15 +38,16 @@ const CustomModal = ({ isOpen, onSubmit, onCancel, time}: any) => {
 };
 
 const TimerBox = () => {
+  const router = useRouter();
+  const { id } = router.query; // midをURLから取得
   const [modal, setModal] = useState(false); // モーダルの表示・非表示
   const [timer, setTimer] = useState(0); // ストップウォッチの時間
   const [isActive, setIsActive] = useState(false); // ストップウォッチが動いているかどうか
   const [intervalId, setIntervalId] = useState<number | null>(null);
 
-
   const handleModalClose = (resetTimer: boolean) => {
     if (resetTimer) {
-      setTimer(0);
+      handleReset();
     }
     setModal(false);
   };
@@ -91,11 +88,19 @@ const TimerBox = () => {
     };
   };
 
+  const handleReset = () => {
+    setTimer(0);
+  }
+
   return (
     <>
       <TimeCard hour={Math.floor(timer / 3600)} minute={Math.floor(timer / 60)} second={timer % 60} />
       <Box>
-        <CustomButton label="pause" onClick={() => handlePause()}/>
+        { isActive
+          ? <CustomButton label="pause" onClick={() => handlePause()}/>
+          : <CustomButton label="reset" onClick={() => handleReset()}/>
+        }
+
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
         <CustomModal
@@ -103,6 +108,7 @@ const TimerBox = () => {
           onSubmit={() => handleModalClose(true)}
           onCancel={() => handleModalClose(false)}
           time={timer}
+          mid={id}
         />
       </Box>
     </>
@@ -120,27 +126,6 @@ const Box = styled.div`
   margin-top: 24px;
 `;
 
-const ModalContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-`;
-
-const ModalContent = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 24px;
-  border-radius: 8px;
-  text-align: center;
-`;
-
 const ModalText = styled.p`
   font-size: 24px;
   margin-bottom: 24px;
@@ -152,4 +137,5 @@ const TextareaContainer = styled.textarea `
   border: 1px solid #9A9A9A;
   border-radius: 5px;
   margin-bottom: 10px;
+  padding: 5px;
 `;
