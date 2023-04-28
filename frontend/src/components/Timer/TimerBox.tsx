@@ -26,7 +26,7 @@ const CustomModal = ({ isOpen, onClose, time }: any) => {
           <label>学習メモ</label><br />
           <TextareaContainer onChange={handleMemoChange} />
         </form>
-        <Button onClick={onClose}>閉じる</Button>
+        <CustomButton label="記録する" onClick={onClose} />
       </Modal>
 
   );
@@ -135,4 +135,5 @@ const TextareaContainer = styled.textarea `
   width: 100%;
   border: 1px solid #9A9A9A;
   border-radius: 5px;
+  margin-bottom: 10px;
 `;
