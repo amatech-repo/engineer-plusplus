@@ -2,25 +2,43 @@ import styled from "styled-components";
 import CustomButton from "../Button";
 import { useEffect, useState } from "react";
 import TimeCard from "./TimeCard";
+import Modal from "react-modal";
+import { Button } from "@mui/material";
+
+const CustomModal = ({ isOpen, onClose }: any) => {
+  return (
+    <Modal isOpen={isOpen} >
+      <p>お疲れ様でした！</p>
+      <Button onClick={onClose}>閉じる</Button>
+    </Modal>
+  );
+};
 
 const TimerBox = () => {
   const [modal, setModal] = useState(false);
   const [timer, setTimer] = useState(0); // ストップウォッチの時間
   const [isActive, setIsActive] = useState(false); // ストップウォッチが動いているかどうか
-  const [setIntervalID, setSetIntervalID] = useState(null);
+  const [intervalId, setIntervalId] = useState<number | null>(null);
+
+
+  const handleModalClose = () => {
+    setTimer(0);
+    setModal(false);
+  };
 
   useEffect(() => {
-    let intervalId: any = null;
     if (isActive) {
-      intervalId = setInterval(() => {
+      const id = setInterval(() => {
         setTimer((timer) => timer + 1);
       }, 1000);
-      setSetIntervalID(intervalId);
-    } else if (!isActive && timer !== 0) {
+      setIntervalId(id);
+    } else {
       clearInterval(intervalId);
+      setIntervalId(null);
     }
     return () => clearInterval(intervalId);
-  }, [isActive, timer]);
+  }, [isActive]);
+
 
   const handleStart = () => {
     if(!isActive) {
@@ -31,32 +49,17 @@ const TimerBox = () => {
   const handlePause = () => {
     if(isActive) {
       setIsActive(false);
-      clearInterval(setIntervalID);
+      clearInterval(intervalId);
     };
   };
 
   const handleStop = () => {
     if(timer > 0) {
       setIsActive(false);
-      setTimer(0);
-      clearInterval(setIntervalID);
+      clearInterval(intervalId);
       setModal(true);
-    };
-  };
 
-  const Modal = ({isOpen, closeModal}) => {
-    return (
-      <>
-        {isOpen &&
-          <ModalContainer>
-            <ModalContent>
-              <ModalText>お疲れ様でした</ModalText>
-              <CustomButton label="OK" onClick={closeModal}/>
-            </ModalContent>
-          </ModalContainer>
-        }
-      </>
-    );
+    };
   };
 
   return (
@@ -66,6 +69,7 @@ const TimerBox = () => {
         <CustomButton label="pause" onClick={() => handlePause()}/>
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
+        <CustomModal isOpen={modal} onClose={handleModalClose} />
       </Box>
     </>
 
