@@ -10,5 +10,6 @@ export const materialState = atom({
         categoryID: '',
         url: '',
         image: '',
+        tags: [''],
     },
 })

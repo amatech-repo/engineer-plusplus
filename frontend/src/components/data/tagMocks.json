@@ -34,5 +34,41 @@
     {
         "id": 9,
         "name": "Kotlin"
+    },
+    {
+        "id": 10,
+        "name": "Vue.js"
+    },
+    {
+        "id": 11,
+        "name": "C言語"
+    },
+    {
+        "id": 12,
+        "name": "C++"
+    },
+    {
+        "id": 13,
+        "name": "C#"
+    },
+    {
+        "id": 14,
+        "name": "Flutter"
+    },
+    {
+        "id": 15,
+        "name": "Python"
+    },
+    {
+        "id": 16,
+        "name": "Kotlin"
+    },
+    {
+        "id": 17,
+        "name": "HTML"
+    },
+    {
+        "id": 18,
+        "name": "CSS"
     }
 ]
