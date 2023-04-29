@@ -1,14 +1,15 @@
-import { collection, addDoc, setDoc } from "firebase/firestore";
-import { auth, db } from '../../../lib/FirebaseConfig';
+import { collection, addDoc, setDoc, getFirestore, Timestamp } from "firebase/firestore";
 
 const addStudyRecord = async (time: string, memo: number, mid: string, uid: string) => {
+
+    const db = getFirestore();
     try {
         const newRecordData = {
             uid: uid,
             mid: mid,
             time: time,
             memo: memo,
-            createdAt: Date.now()
+            createdAt: Timestamp.now()
         }
         await addDoc(collection(db, "records"), newRecordData);
         console.log("Records added successfully!");
