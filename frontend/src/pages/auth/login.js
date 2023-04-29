@@ -18,7 +18,7 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-         alert( 'success！' );
+        alert('success！');
         console.log(user);
         if (user && router.pathname !== '/') {
           router.push('/');
@@ -34,9 +34,9 @@ export default function Login() {
 
   // パスワードを忘れた場合のリンクタグを追加
   return (
-    <div className={styles.card}>
+    <div className={styles.card} style={{ display: "flex", justifyContent: "center", textAlign: "center" }}>
       <h1>Sign In</h1>
-      <Header />
+      <br />
       <div style={{ paddingBottom: "1rem" }}>
         <Form>
           <FormGroup>
@@ -47,7 +47,7 @@ export default function Login() {
               type="email"
               placeholder='Enter your email'
               name="email"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width: 500, fontSize: "1.2rem" }}
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormGroup>
@@ -59,12 +59,13 @@ export default function Login() {
               type="password"
               placeholder='Enter your password'
               name="password"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width: 500, fontSize: "1.2rem" }}
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
+          <br />
           <Button
-            style={{ width: 220 }}
+            style={{ height: 80, width: 200 }}
             color="primary"
             onClick={() => {
               doLogin();
@@ -72,20 +73,49 @@ export default function Login() {
           >
             Sign In
           </Button>
+          <br /> <br />          <br /> <br />
+          <Button
+            style={{ height: 80, width: 200 }}
+            color="primary"
+            onClick={() => {
+              doLogin();
+            }}
+
+          >
+            Sign In with Google
+
+          </Button>
+          <br />
+          <br />          <br />          <br />
+          <Button
+            style={{ height: 80, width: 200 }}
+            color="primary"
+            onClick={() => {
+              doLogin();
+            }}
+
+          >
+            Sign In with Github
+
+          </Button>
+          <br />          <br />          <br />          <br />
         </Form>
       </div>
+      <br />
+      <br />
       <div>
 
-        
-          
-          <p>Don't have an account?<a href="/auth/register"> Sign Up</a></p>
+        <p>Don't have an account?<a href="/auth/register"> <br /> Sign Up</a></p>
       </div>
+      <br />
+
       <div>
-        <Link
-          href="/auth/forgot_password">
-          Forgot Password?
-        </Link>
+
+        <a href="/auth/forgot_password">Forgot Password?</a>
+
       </div>
+
     </div>
+
   )
 }

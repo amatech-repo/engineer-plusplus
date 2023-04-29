@@ -7,6 +7,8 @@ import { useRecoilState, useResetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 
 import { useAuth } from "@/context/AuthContext";
+import { headers } from 'next/dist/client/components/headers';
+import { autocompleteClasses } from '@mui/material';
 
 export default function Register() {
   // useStateでユーザーが入力したメールアドレスとパスワードをemailとpasswordに格納する
@@ -41,19 +43,23 @@ export default function Register() {
   }
 
   return (
-    <div className={styles.card}>
-      <h1>Sign Up</h1>
-      <div>
+  
+    <div className={styles.card} style={{  display: "flex", justifyContent: "center",textAlign: "center" }}>
+  <header>
+     <h1 style={{ textAlign: "center" }}>Sign Up</h1>
+   
+     </header>
+      
         <Form>
         <FormGroup>
-            <Label>
+        <Label >
               Name
             </Label>
             <Input
               type="text"
               placeholder='Enter your name'
               name="name"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width:500,textAlign: "center", fontSize: "1.2rem" }}
               // onChangeでユーザーが入力した値を取得し、その値をnameに入れる
               onChange={(e) => setName(e.target.value)}
             />
@@ -67,7 +73,7 @@ export default function Register() {
               type="email"
               placeholder='Enter your email'
               name="email"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width:500, textAlign: "center",fontSize: "1.2rem" }}
               // onChangeでユーザーが入力した値を取得し、その値をemailに入れる
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -80,7 +86,7 @@ export default function Register() {
               type="password"
               placeholder='Enter your password'
               name="password"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width:500, textAlign: "center", fontSize: "1.2rem" }}
               // onChangeでユーザーが入力した値を取得し、その値をpasswordに入れる
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -93,7 +99,7 @@ export default function Register() {
               type="password"
               placeholder='Re-enter your password'
               name="password"
-              style={{ height: 50, fontSize: "1.2rem" }}
+              style={{ height: 50, width:500, textAlign: "center", fontSize: "1.2rem" }}
               // onChangeでユーザーが入力した値を取得し、その値とpasswordが一致するかどうかを確認する
               onChange ={(e) => { setPassword(e.target.value)}}
 
@@ -107,9 +113,9 @@ export default function Register() {
 
             />
           </FormGroup>
-          
+          <br/><br/>
           <Button
-            style={{ width: 220 }}
+            style={{ height: 80,width: 200 }}
             color="primary"
             // 登録ボタンがクリックされたときdoRegister関数が実行されるようにする
             onClick={() => {
@@ -123,6 +129,7 @@ export default function Register() {
               <p>Already have an account? <a href="/auth/login">Login</a></p>
             </div>
       </div>
-    </div>
+
+
   )
 }
