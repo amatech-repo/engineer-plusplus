@@ -37,8 +37,8 @@ const MaterialList = (props: Props) => {
               id={item.id}
               title={item.title}
               totalStudyTime={item.totalStudyTime}
-              tags={item.tags}
-              thumbnail={item.image}
+              tags={item.tags && item.tags}
+              thumbnail={item.image && item.image}
             />
           </ContainerContent>
         ))}
