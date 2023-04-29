@@ -5,6 +5,8 @@ import { DataUsage, Height, MarginRounded } from '@mui/icons-material';
 import { Select } from '@mui/material';
 import Tag from '@/components/Tag';
 import Layout from '@/components/Layouts/layout';
+import Thumbnail from '@/components/Thumbnail';
+import Image from 'next/image';
 
 export default function Profile() {
     const router = useRouter();
@@ -45,8 +47,8 @@ export default function Profile() {
             <form onSubmit={handleSubmit}>
                 <div style={{ margin: "0 20%" }}>
                     <div style={{
-                        borderRadius: '50%', overflow: 'hidden', marginRight: '16px', backgroundColor: '#'}}>
-                        {/* <Image src="/profile.jpg" alt="プロフィール画像" width={120} height={120}/> */}
+                         borderRadius: '50%', overflow: 'hidden', marginRight: '16px', backgroundColor: '#'
+                    }}>
                     </div>
                     <div>
                         <h1 style={{ textAlign: 'center', marginTop: '30px' }}>
@@ -56,6 +58,10 @@ export default function Profile() {
                             プロフィール登録画面
                         </h2>
                         <hr />
+                        <div>
+                        <div style={{borderRadius: "50%"}}>
+                        <Image src="/my-image.jpeg" alt="my" width={50} height={50}/>
+                        </div>
                         <div style={{ marginLeft: '300px', marginTop: '100px' }}> {/* ニックネーム記入欄 */}
                             <label>ニックネーム</label>
                             <br />
@@ -65,7 +71,8 @@ export default function Profile() {
                                 value={name}
                                 onChange={(event) => setName(event.target.value)}
                             />
-                        </div>
+                            </div>
+                            </div>
                         <br />
                         <div style={{ textAlign: 'center', marginTop: "100px" }}>
                             <label style={{ float: "left" }}>自己紹介</label>
@@ -87,7 +94,7 @@ export default function Profile() {
                         </div>
                         <br />
                         <div style={{ textAlign: 'center' }}>
-                            <button type="submit" style={{ width: '10%',height: '25px',border: '1px solid #9A9A9A',borderRadius: '5px' }}>保存</button>
+                            <button type="submit" style={{ width: '10%',height: '25px',border: '1px solid #9A9A9A',borderRadius: '5px' , marginBottom: '20px'}}>保存</button>
                         </div>
                     </div>
                 </div>
