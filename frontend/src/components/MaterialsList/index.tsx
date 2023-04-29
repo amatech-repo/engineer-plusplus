@@ -13,7 +13,7 @@ type Materials = {
 	uId: string;
 	title: string;
 	author: string;
-	categoryID: string;
+	categoryId: string;
 	description: string;
 	image: string;
 	tags: string[];

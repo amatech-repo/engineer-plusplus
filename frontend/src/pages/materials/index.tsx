@@ -15,7 +15,7 @@ type Materials = {
 	uId: string;
 	title: string;
 	author: string;
-	categoryID: string;
+	categoryId: string;
 	description: string;
 	image: string;
 	tags: string[];
@@ -41,7 +41,7 @@ const Dashboard = () => {
 						uId: data.uId, 
 						title: data.title,
 						author: data.author,
-						categoryID: data.categoryID,
+						categoryId: data.categoryId,
 						description: data.description,
 						image: data.image,
 						tags: data.tags,
