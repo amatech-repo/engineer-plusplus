@@ -1,4 +1,4 @@
-
+import styles from '@/styles/Home.module.css'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 // 現時点で使わないものもあるが今後のことを考えて入れておく
 import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 import { useAuth } from "@/context/AuthContext";
 import { headers } from 'next/dist/client/components/headers';
-import { autocompleteClasses } from '@mui/material';
 
 export default function Register() {
   // useStateでユーザーが入力したメールアドレスとパスワードをemailとpasswordに格納する
