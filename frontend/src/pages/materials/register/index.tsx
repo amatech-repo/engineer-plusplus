@@ -23,7 +23,7 @@ const RegisterMaterials = memo(() => {
 
     const handleRegisterButtonClick = () => {
 
-        if (material.title === "" || material.categoryID === "") {
+        if (material.title === "" || material.categoryId === "") {
             alert("教材名とカテゴリは必須項目です。入力してください。");
         } else {
             console.log('クリック: ', material);
@@ -33,7 +33,7 @@ const RegisterMaterials = memo(() => {
                 title: '',
                 author: '',
                 description: '',
-                categoryID: '',
+                categoryId: '',
                 url: '',
                 image: '',
                 tags: [''],
