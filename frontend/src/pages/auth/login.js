@@ -1,4 +1,4 @@
-
+import { GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
 import { useState } from 'react';
@@ -11,6 +11,45 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+
+  // Google 認証の処理
+  const handleGoogleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+   
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // Google 認証に成功した場合の処理
+        console.log(result);
+        if (router.pathname !== '/') {
+          router.push('/');
+        }
+      })
+      .catch((error) => {
+        // Google 認証に失敗した場合の処理
+        console.log(error);
+      });
+  };
+
+
+
+  // GitHub 認証の処理
+  const handleGithubSignIn = () => {
+    const provider = new GithubAuthProvider();
+   
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // GitHub 認証に成功した場合の処理
+        console.log(result);
+        if (router.pathname !== '/') {
+          router.push('/');
+        }
+      })
+      .catch((error) => {
+        // GitHub 認証に失敗した場合の処理
+        console.log(error);
+      });
+  };
+
 
   const doLogin = () => {
     const auth = getAuth();
@@ -78,7 +117,8 @@ export default function Login() {
             style={{ height: 80, width: 200 }}
             color="primary"
             onClick={() => {
-              doLogin();
+             // Google認証を行う関数を呼び出す
+             handleGoogleSignIn();
             }}
 
           >
@@ -91,7 +131,8 @@ export default function Login() {
             style={{ height: 80, width: 200 }}
             color="primary"
             onClick={() => {
-              doLogin();
+            // Github認証を行う関数を呼び出す
+            handleGithubSignIn();
             }}
 
           >
