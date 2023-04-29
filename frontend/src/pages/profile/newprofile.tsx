@@ -61,7 +61,7 @@ export default function Profile() {
                             プロフィール登録画面
                         </h2>
                         <hr />
-                        <div style={{ marginLeft: '250px', marginTop: '50px' }}>
+                        <div style={{ marginLeft: '250px', marginTop: '50px' }}> {/* ニックネーム記入欄 */}
                             <label>ニックネーム</label>
                             <br />
                             <input
@@ -116,34 +116,12 @@ export default function Profile() {
                         <br />
                         <div style={{ textAlign: 'center', marginTop: "20px" }}>
                             <label >好きな言語:</label>
-                    <select
-                        style={inputStyle}
-                        type="data"
-                        value={favoriteLanguage}
-                        onChange={(event) => setFavoriteLanguage(event.target.value)}
-                    >
-                            <option value="">選択してください</option>
-                            <option value="JavaScript">JavaScript</option>
-                            <option value="React">React</option>
-                            <option value="Node.js">Node.js</option>
-                            <option value="HTML">HTML</option>
-                            <option value="CSS">CSS</option> 
-                    </select>
+                                <select></select>
                         </div>
                         <br />
                         <div style={{ textAlign: 'center', marginTop: "30px", marginBottom: '20px' }}>
                             <label>好きな技術:</label>
-                            <select
-                                style={inputStyle}
-                                id="technology"
-                                value={favoriteTechnology}
-                                onChange={(event) => setFavoriteTechnology(event.target.value)}
-                            >
-                                <option value="">選択してください</option>
-                                <option value="React">React</option>
-                                <option value="Vue">Vue</option>
-                                <option value="Angular">Angular</option>
-                                <option value="Django">Django</option>
+                            <select>
                             </select>
                         </div>
                         <br />
