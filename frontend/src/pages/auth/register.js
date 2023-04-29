@@ -1,4 +1,4 @@
-import styles from '../../styles/Home.module.css'
+
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 // 現時点で使わないものもあるが今後のことを考えて入れておく
 import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
