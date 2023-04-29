@@ -1,16 +1,16 @@
 import { collection, addDoc, Timestamp, getFirestore } from "firebase/firestore";
 
-async function addMaterialToFirebase(material: any, uid: any) {
+async function addMaterialToFirebase(material: any, uId: any) {
 
     try {
 
         const db = getFirestore();
         const newMaterialData = {
-            uid: uid,
+            uId: uId,
             title: material.title,
             author: material.author,
             description: material.description,
-            categoryID: material.categoryID,
+            categoryId: material.categoryId,
             url: material.url,
             image: material.image,
             tags: material.tags,

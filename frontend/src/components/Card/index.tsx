@@ -2,15 +2,21 @@ import Link from "next/link";
 import styled from "styled-components";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 
+interface Tag {
+  id: number;
+  name: string;
+}
+
 interface CardProps {
   id: string | number;
   title: string;
   totalStudyTime: number | string;
-  thumbnail: string;
-  tags: string[];
+  thumbnail?: string;
+  tags?: Tag[];
 }
 
 const Card = ({ id, title, totalStudyTime, tags, thumbnail }: CardProps) => {
+  console.log(tags);
   return (
     <Wrapper>
       <Link href={`/materials/detail/${id}`}>
@@ -25,11 +31,7 @@ const Card = ({ id, title, totalStudyTime, tags, thumbnail }: CardProps) => {
             <CardTextBox>
               <CardTitle>{title}</CardTitle>
               <TotalStudyTime>トータル勉強時間: {totalStudyTime} h</TotalStudyTime>
-              <STagList>
-                {tags.map((tag) => (
-                  <Tag>{tag}</Tag>
-                ))}
-              </STagList>
+              <STagList>{tags && tags.map((tag) => <Tag key={tag.id}>{tag.name}</Tag>)}</STagList>
             </CardTextBox>
           </CardBody>
         </CardContainer>
