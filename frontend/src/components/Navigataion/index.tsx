@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { getAuth, signOut } from "firebase/auth";
 
 const Navigation = () => {
   const router = useRouter();
@@ -10,6 +11,21 @@ const Navigation = () => {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  // ログアウトの処理を追記
+  const doLogout = () => {
+    const auth = getAuth();
+
+    signOut(auth)
+      .then(() => {
+        // ログアウトされたことをわかりやすくするためのアラート
+        alert("ログアウト完了！");
+        router.push("/auth/login")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -48,7 +64,7 @@ const Navigation = () => {
             <NavLink>タイムライン</NavLink>
           </Link>
         </li>
-        <LogoutButton>sign out</LogoutButton>
+        <LogoutButton onClick={() => doLogout()}>sign out</LogoutButton>
       </ul>
     </Nav>
   );
