@@ -27,7 +27,7 @@ export default function Register() {
         // ユーザー登録すると自動的にログインされてuserCredential.userでユーザーの情報を取得できる
         const user = userCredential.user;
         // ユーザー登録ができたかどうかをわかりやすくするためのアラート
-        alert('登録完了！');
+        alert('success！');
         console.log(user);
 
         if (user && router.pathname !== '/') {
@@ -42,7 +42,7 @@ export default function Register() {
 
   return (
     <div className={styles.card}>
-      <h1>Sign Up to TailAdmin</h1>
+      <h1>Sign Up</h1>
       <div>
         <Form>
         <FormGroup>
@@ -87,15 +87,23 @@ export default function Register() {
           </FormGroup>
           <FormGroup>
             <Label>
-              Re-type Password（確認用）
+              Re-type Password
             </Label>
             <Input
               type="password"
               placeholder='Re-enter your password'
               name="password"
               style={{ height: 50, fontSize: "1.2rem" }}
-              // onChangeでユーザーが入力した値を取得し、その値をpasswordに入れる
-              onChange={(e) => setPassword(e.target.value)}
+              // onChangeでユーザーが入力した値を取得し、その値とpasswordが一致するかどうかを確認する
+              onChange ={(e) => { setPassword(e.target.value)}}
+
+              //もし一致していなかったら、ユーザーに一致していないことを知らせる
+              undefined ={(e) => {
+                 if (e.target.value !== password) {
+                   alert('Passwords do not match!');
+                }
+               }}
+
 
             />
           </FormGroup>
@@ -110,13 +118,10 @@ export default function Register() {
           >
             Sign Up
           </Button>
-          
-
         </Form>
             <div>
               <p>Already have an account? <a href="/auth/login">Login</a></p>
             </div>
-
       </div>
     </div>
   )

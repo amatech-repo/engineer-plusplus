@@ -18,7 +18,7 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-         alert( 'ログインOK！' );
+         alert( 'success！' );
         console.log(user);
         if (user && router.pathname !== '/') {
           router.push('/');
@@ -35,7 +35,7 @@ export default function Login() {
   // パスワードを忘れた場合のリンクタグを追加
   return (
     <div className={styles.card}>
-      <h1>ログイン</h1>
+      <h1>Sign In</h1>
       <Header />
       <div style={{ paddingBottom: "1rem" }}>
         <Form>
@@ -45,6 +45,7 @@ export default function Login() {
             </Label>
             <Input
               type="email"
+              placeholder='Enter your email'
               name="email"
               style={{ height: 50, fontSize: "1.2rem" }}
               onChange={(e) => setEmail(e.target.value)}
@@ -56,6 +57,7 @@ export default function Login() {
             </Label>
             <Input
               type="password"
+              placeholder='Enter your password'
               name="password"
               style={{ height: 50, fontSize: "1.2rem" }}
               onChange={(e) => setPassword(e.target.value)}
@@ -81,7 +83,7 @@ export default function Login() {
       <div>
         <Link
           href="/auth/forgot_password">
-          パスワードを忘れた場合
+          Forgot Password?
         </Link>
       </div>
     </div>
