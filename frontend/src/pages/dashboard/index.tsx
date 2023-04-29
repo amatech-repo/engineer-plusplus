@@ -43,7 +43,7 @@ const Dashboard = () => {
 					const data = doc.data() as Materials;
 					return {
 						id: doc.id,
-						uId: data.uId, 
+						uId: data.uId,
 						title: data.title,
 						author: data.author,
 						categoryId: data.categoryId,
@@ -66,29 +66,40 @@ const Dashboard = () => {
 		fetchData();
 	}, []);
 
-  return (
-    <>
-      <Container>
-        <RecentStudyContainer>
-          <RecentStudy />
-        </RecentStudyContainer>
-        <ContainerRight>
-          <Link href="/materials/register">
-            <CustomButton label="教材を登録" />
-          </Link>
-          <TodayStudyTimeContainer>
-            <TodayStudyTime studyTime={12345} />
-          </TodayStudyTimeContainer>
-        </ContainerRight>
-      </Container>
-      <MaterialList listTitle="教材一覧" data={data} />
-      <MaterialList listTitle="Youtube" data={data} />
-      <MaterialList listTitle="Udemy" data={data} />
-      <MaterialList listTitle="Progate" data={data} />
-      <MaterialList listTitle="書籍" data={data} />
-      <MaterialList listTitle="その他" data={data} />
-    </>
-  );
+	return (
+		<>
+			<Container>
+				<RecentStudyContainer>
+					<RecentStudy />
+				</RecentStudyContainer>
+				<ContainerRight>
+					<Link href="/materials/register">
+						<CustomButton label="教材を登録" />
+					</Link>
+					<TodayStudyTimeContainer>
+						<TodayStudyTime studyTime={12345} />
+					</TodayStudyTimeContainer>
+				</ContainerRight>
+			</Container>
+			{/* カードがない場合はMaterialListを非表示にする*/}
+			<MaterialList listTitle="教材一覧" data={data} />
+			{data?.filter((material) => material.categoryId === "0").length !== 0 && (
+				<MaterialList listTitle="書籍" data={data?.filter((material) => material.categoryId === "0")} />
+			)}
+			{data?.filter((material) => material.categoryId === "1").length !== 0 && (
+				<MaterialList listTitle="Youtube" data={data?.filter((material) => material.categoryId === "1")} />
+			)}
+			{data?.filter((material) => material.categoryId === "2").length !== 0 && (
+				<MaterialList listTitle="Udemy" data={data?.filter((material) => material.categoryId === "2")} />
+			)}
+			{data?.filter((material) => material.categoryId === "3").length !== 0 && (
+				<MaterialList listTitle="Progate" data={data?.filter((material) => material.categoryId === "3")} />
+			)}
+			{data?.filter((material) => material.categoryId === "4").length !== 0 && (
+				<MaterialList listTitle="その他" data={data?.filter((material) => material.categoryId === "4")} />
+			)}
+		</>
+	);
 };
 
 export default Dashboard;
