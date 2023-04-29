@@ -1,25 +1,45 @@
 import styled from "styled-components";
 
 import Card from "../Card";
-import materialsData from "../data/materialsMock.json";
-
-const data = materialsData;
+import { Timestamp } from "firebase/firestore";
 
 interface Props {
   listTitle: string;
-}
+  data: Materials[];
+};
+
+type Materials = {
+	id: string;
+	uId: string;
+	title: string;
+	author: string;
+	categoryId: string;
+	description: string;
+	image: string;
+	tags: string[];
+	totalStudyTime: number;
+	url: string;
+	createdAt: Timestamp;
+	updateAt: Timestamp;
+};
 
 const MaterialList = (props: Props) => {
-  const { listTitle } = props;
+  const { listTitle, data } = props;
 
   return (
     <Container>
       {/* TODO: youtube一覧やudemy一覧などカテゴリによってフィルタリングできるようにする */}
       <h3>{listTitle}</h3>
       <CardContainer>
-        {data.map((item) => (
+        {data && data.map((item) => (
           <ContainerContent key={item.id}>
-            <Card title={item.title} totalStudyTime={item.total_study_time} tags={item.tags} />
+            <Card
+              id={item.id}
+              title={item.title}
+              totalStudyTime={item.totalStudyTime}
+              tags={item.tags}
+              thumbnail={item.image}
+            />
           </ContainerContent>
         ))}
       </CardContainer>

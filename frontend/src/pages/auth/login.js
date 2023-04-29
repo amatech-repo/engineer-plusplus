@@ -5,10 +5,12 @@ import { useState } from 'react';
 
 import Header from './Header'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const doLogin = () => {
     const auth = getAuth();
@@ -17,57 +19,72 @@ export default function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         // alert( 'ログインOK！' );
-        console.log( user );
+        console.log(user);
+        if (user && router.pathname !== '/') {
+          router.push('/');
+          return null;
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+
+
   // パスワードを忘れた場合のリンクタグを追加
   return (
     <div className={styles.card}>
       <h1>ログイン</h1>
-      <Header/>
+      <Header />
       <div style={{ paddingBottom: "1rem" }}>
         <Form>
-            <FormGroup>
-              <Label>
-                メールアドレス：
-              </Label>
-              <Input
-                type="email"
-                name="email"
-                style={{ height: 50, fontSize: "1.2rem" }}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>
-                パスワード：
-              </Label>
-              <Input
-                type="password"
-                name="password"
-                style={{ height: 50, fontSize: "1.2rem" }}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormGroup>
-            <Button
-                style={{ width: 220 }}
-                color="primary"
-                onClick={()=>{
-                  doLogin();
-                }}
-              >
-              ログイン
-            </Button>
+          <FormGroup>
+            <Label>
+              メールアドレス：
+            </Label>
+            <Input
+              type="email"
+              name="email"
+              style={{ height: 50, fontSize: "1.2rem" }}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>
+              パスワード：
+            </Label>
+            <Input
+              type="password"
+              name="password"
+              style={{ height: 50, fontSize: "1.2rem" }}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormGroup>
+          <Button
+            style={{ width: 220 }}
+            color="primary"
+            onClick={() => {
+              doLogin();
+            }}
+          >
+            ログイン
+          </Button>
         </Form>
       </div>
-      <Link
-        href="/auth/forgot_password">
-        パスワードを忘れた場合
-      </Link>
+      <div>
+
+        <Link
+          href="/auth/register">
+          新規登録はこちら
+        </Link>
+      </div>
+      <div>
+        <Link
+          href="/auth/forgot_password">
+          パスワードを忘れた場合
+        </Link>
+      </div>
     </div>
   )
 }
