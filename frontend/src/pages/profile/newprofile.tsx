@@ -3,6 +3,8 @@ import router, { useRouter } from 'next/router';
 import { getFirestore } from "firebase/firestore";
 import { DataUsage, Height, MarginRounded } from '@mui/icons-material';
 import { Select } from '@mui/material';
+import Tag from '@/components/Tag';
+import Layout from '@/components/Layouts/layout';
 
 export default function Profile() {
     const router = useRouter();
@@ -10,12 +12,7 @@ export default function Profile() {
     const [favoriteLanguage, setFavoriteLanguage] = useState('');
     const [favoriteTechnology, setFavoriteTechnology] = useState('');
     const [skills, setSkills] = useState('');
-    const [comment, setComment] = useState('');
-    const [year, setYear] = useState('');
-    const [month, setMonth] = useState('');
-    const [day, setDay] = useState('');
-    const inputStyle = { fontSize: '16px', width: '300px' };
-
+    const [comment, setComment] = useState(''); 
 
         const handleSubmit = async (event) => {
             event.preventDefault();
@@ -30,9 +27,6 @@ export default function Profile() {
 
                     await firestore.collection('users').doc(user.uid).set({
                         name,
-                        year,
-                        month,
-                        day,
                         favoriteLanguage,
                         favoriteTechnology,
                         skills,
@@ -46,91 +40,58 @@ export default function Profile() {
             }
         };
 
-        return (
+    return (
+            <Layout>
             <form onSubmit={handleSubmit}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ borderRadius: '50%', overflow: 'hidden', marginRight: '16px' }}>
+                <div style={{ margin: "0 20%" }}>
+                    <div style={{
+                        borderRadius: '50%', overflow: 'hidden', marginRight: '16px', backgroundColor: '#'}}>
                         {/* <Image src="/profile.jpg" alt="プロフィール画像" width={120} height={120}/> */}
                     </div>
-          
                     <div>
                         <h1 style={{ textAlign: 'center', marginTop: '30px' }}>
-                            サイト名
+                            エンジニア＋＋
                         </h1>
                         <h2 style={{ textAlign: 'left', fontSize: "16px" }}>
                             プロフィール登録画面
                         </h2>
                         <hr />
-                        <div style={{ marginLeft: '250px', marginTop: '50px' }}> {/* ニックネーム記入欄 */}
+                        <div style={{ marginLeft: '300px', marginTop: '100px' }}> {/* ニックネーム記入欄 */}
                             <label>ニックネーム</label>
                             <br />
                             <input
-                                style={inputStyle}
+                                style={{width: '100%',height: '50px',border: '1px solid #9A9A9A',borderRadius: '5px',padding:'8px',fontSize:'16px'}}
                                 type="text"
                                 value={name}
                                 onChange={(event) => setName(event.target.value)}
                             />
                         </div>
                         <br />
-                        <div style={{ marginLeft: "250px" }}>
-                            <label>登録日</label>
-                            <br />
-                            <span style={{ display: 'inline-block' }}>
-                                <input
-                                    style={{ width: '80px', marginRight: '10px' }}
-                                    type="text"
-                                    id="year"
-                                    value={year}
-                                />
-                                <label htmlFor='year'>年</label>
-                            </span>
-                            <span style={{ display: 'inline-block' }}>
-                                <input
-                                    style={{ width: '50px', marginRight: '10px' }}
-                                    type="text"
-                                    id="month"
-                                    value={month}
-                                />
-                                <label htmlFor='month'>月</label>
-                            </span>
-                            <span style={{ display: 'inline-block' }}>
-                                <input
-                                    style={{ width: '50px', marginRight: '10px' }}
-                                    type="text"
-                                    id="day"
-                                    value={day}
-                                />
-                                <label htmlFor='month'>日</label>
-                            </span>
-                        </div>
-                        <br />
-                        <div style={{ textAlign: 'center', marginTop: "50px" }}>
-                            <label style={{ float: "left" }}>自己紹介:</label>
+                        <div style={{ textAlign: 'center', marginTop: "100px" }}>
+                            <label style={{ float: "left" }}>自己紹介</label>
                             <textarea
-                                style={{ width: '400px' }}
-                                rows="5"
+                                style={{ width: '100%',height: '75px',border: '1px solid #9A9A9A',borderRadius: '5px',padding:'8px' }}
                                 value={comment}
                                 onChange={(event) => setComment(event.target.value)}
                             />
                         </div>
                         <br />
-                        <div style={{ textAlign: 'center', marginTop: "20px" }}>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: "20px", textAlign:'center'}}>
                             <label >好きな言語:</label>
-                                <select></select>
+                            <Tag />
                         </div>
                         <br />
-                        <div style={{ textAlign: 'center', marginTop: "30px", marginBottom: '20px' }}>
-                            <label>好きな技術:</label>
-                            <select>
-                            </select>
+                        <div style={{ display: 'flex',textAlign: 'center', marginTop: "30px", marginBottom: '20px' }}>
+                            <label style={{marginRight: '50px'}}>好きな技術:</label>
+                            <Tag />
                         </div>
                         <br />
                         <div style={{ textAlign: 'center' }}>
-                            <button type="submit" style={{ display: 'inline-block' }}>保存</button>
+                            <button type="submit" style={{ width: '10%',height: '25px',border: '1px solid #9A9A9A',borderRadius: '5px' }}>保存</button>
                         </div>
                     </div>
                 </div>
             </form>
+            </Layout>
         );
     }
-
