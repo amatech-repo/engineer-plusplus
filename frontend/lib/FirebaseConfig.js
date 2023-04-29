@@ -4,8 +4,11 @@ import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
 import {
 	getAuth,
+	GoogleAuthProvider,
+  GithubAuthProvider,
 	Auth,
 } from "firebase/auth";
+
 
 // .envファイルで設定した環境変数をfirebaseConfigに入れる
 const firebaseConfig = {
@@ -28,5 +31,9 @@ if (typeof window !== "undefined" && !getApps().length) {
 	db = getFirestore();
 }
 //export { firebaseApp, auth, firestore };
-export { firebaseApp, auth, db};
 
+// Google認証とGithub認証のプロバイダーを作成
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
+
+export { firebaseApp, auth, db, googleProvider, githubProvider};
