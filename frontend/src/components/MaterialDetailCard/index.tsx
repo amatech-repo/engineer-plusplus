@@ -1,26 +1,69 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import data from "../data/materialsMock.json";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-const MaterialDetailCard = () => {
-  const materialData = data[1];
-  console.log(materialData);
+interface Material {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  tags: { id: number; name: string }[];
+  image: string;
+  url: string;
+  author: string;
+  totalStudyTime: number;
+}
+
+interface Category {
+  name: string;
+}
+
+interface Props {
+  material: Material | null;
+}
+
+const MaterialDetailCard = ({ material }: Props) => {
+  if (!material) {
+    return <div>Loading...</div>;
+  }
+
+  const { id, title, description, createdAt, tags, image, url, author, totalStudyTime } = material;
+
+  const [category, setCategory] = useState<Category | null>(null);
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const db = getFirestore();
+      const docRef = doc(db, "category", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setCategory({ name: data?.name });
+      }
+    };
+    fetchCategory();
+  }, []);
 
   return (
     <SDetailBox>
-      <SDetailImage src={materialData.thumbnail} alt="" />
+      <SDetailImage src={image} alt="" />
       <SDetailTexts>
-        <STitle>{materialData.title}</STitle>
-        <SStudyTime>トータル勉強時間: {materialData.total_study_time} h</SStudyTime>
-        <SCategory>カテゴリ名 ID:{materialData.category_id}</SCategory>
+        <STitle>{title}</STitle>
+        <SStudyTime>トータル勉強時間: {totalStudyTime} h</SStudyTime>
+        <SCategory>
+          {category && category.name} {/* categoryがnullの場合を考慮 */}
+        </SCategory>
         <STags>
-          {materialData.tags.map((tag) => (
-            <STag>{tag}</STag>
+          {tags && tags.map((tag) => (
+            <STag key={tag.id}>{tag.name}</STag>
           ))}
         </STags>
-        {/* <SAuthor>{materialData.author}</SAuthor> */}
-        <SDescription>{materialData.description}</SDescription>
-        {/* <SLink>{materialData.url}</SLink> */}
+        <SAuthor>{author}</SAuthor>
+        <SDescription>{description}</SDescription>
+        <SLink>{url}</SLink>
       </SDetailTexts>
     </SDetailBox>
   );
