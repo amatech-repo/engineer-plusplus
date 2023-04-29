@@ -55,7 +55,7 @@ export default function Profile() {
                             エンジニア＋＋
                         </h1>
                         <h2 style={{ textAlign: 'left', fontSize: "16px" }}>
-                            プロフィール登録画面
+                            新規プロフィール登録
                         </h2>
                         <hr />
                         <div>
