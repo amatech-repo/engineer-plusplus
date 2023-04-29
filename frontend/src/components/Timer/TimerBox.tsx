@@ -103,14 +103,14 @@ const TimerBox = () => {
 
         <CustomButton label="start" onClick={() => handleStart()}/>
         <CustomButton label="stop" onClick={() => handleStop()}/>
-        {/* <CustomModal
+        <CustomModal
           isOpen={modal}
           onSubmit={() => handleModalClose(true)}
           onCancel={() => handleModalClose(false)}
           time={timer}
           mid={id}
           uid={uid}
-        /> */}
+        />
       </Box>
     </>
 
