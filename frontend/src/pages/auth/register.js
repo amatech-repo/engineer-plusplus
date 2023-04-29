@@ -10,8 +10,10 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function Register() {
   // useStateでユーザーが入力したメールアドレスとパスワードをemailとpasswordに格納する
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const router = useRouter()
   const { currentUser } = useAuth();
 
@@ -40,15 +42,30 @@ export default function Register() {
 
   return (
     <div className={styles.card}>
-      <h1>新規登録</h1>
+      <h1>Sign Up to TailAdmin</h1>
       <div>
         <Form>
+        <FormGroup>
+            <Label>
+              Name
+            </Label>
+            <Input
+              type="text"
+              placeholder='Enter your name'
+              name="name"
+              style={{ height: 50, fontSize: "1.2rem" }}
+              // onChangeでユーザーが入力した値を取得し、その値をnameに入れる
+              onChange={(e) => setName(e.target.value)}
+            />
+          </FormGroup>
+
           <FormGroup>
             <Label>
-              メールアドレス：
+              Email
             </Label>
             <Input
               type="email"
+              placeholder='Enter your email'
               name="email"
               style={{ height: 50, fontSize: "1.2rem" }}
               // onChangeでユーザーが入力した値を取得し、その値をemailに入れる
@@ -57,16 +74,32 @@ export default function Register() {
           </FormGroup>
           <FormGroup>
             <Label>
-              パスワード：
+              Password
             </Label>
             <Input
               type="password"
+              placeholder='Enter your password'
               name="password"
               style={{ height: 50, fontSize: "1.2rem" }}
               // onChangeでユーザーが入力した値を取得し、その値をpasswordに入れる
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
+          <FormGroup>
+            <Label>
+              Re-type Password（確認用）
+            </Label>
+            <Input
+              type="password"
+              placeholder='Re-enter your password'
+              name="password"
+              style={{ height: 50, fontSize: "1.2rem" }}
+              // onChangeでユーザーが入力した値を取得し、その値をpasswordに入れる
+              onChange={(e) => setPassword(e.target.value)}
+
+            />
+          </FormGroup>
+          
           <Button
             style={{ width: 220 }}
             color="primary"
@@ -75,9 +108,15 @@ export default function Register() {
               doRegister();
             }}
           >
-            登録
+            Sign Up
           </Button>
+          
+
         </Form>
+            <div>
+              <p>Already have an account? <a href="/auth/login">Login</a></p>
+            </div>
+
       </div>
     </div>
   )
