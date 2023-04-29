@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import categoriesData from "../data/categoryMocks.json";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from "recoil";
 import { materialState } from "@/store/Auth/material";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 const mockData = categoriesData;
+
+interface Category {
+    id: string;
+    name: string;
+}
 
 interface Props {
     listTitle: string
@@ -13,13 +19,34 @@ interface Props {
 const CatetoryList = (props: Props) => {
     const [material, setMaterial] = useRecoilState(materialState);
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [categories, setCategories] = useState<Category[]>([]);
     const { listTitle } = props
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const db = getFirestore();
+                const categoryDocs = await getDocs(collection(db, 'category'));
+                const categoriesData = categoryDocs.docs.map((doc) => {
+                    return {
+                        id: doc.id,
+                        name: doc.data().name,
+                    };
+                });
+            setCategories(categoriesData);
+            } catch(error) {
+                console.log(error);
+            }
+
+        }
+        fetchCategories();
+    }, []);
 
     const handleCategoryChange = (e: any) => {
         setSelectedCategory(e.target.value);
         const newMaterial = {
             ...material,
-            categoryID: e.target.value,
+            categoryId: e.target.value,
         }
         setMaterial(newMaterial);
         console.log(newMaterial);
@@ -31,7 +58,7 @@ const CatetoryList = (props: Props) => {
             <form>
                 <SelectContainer id="category" value={selectedCategory} onChange={handleCategoryChange}>
                     <option value="" disabled={selectedCategory !== ''}>--選択してください--</option>
-                    {mockData.map((category) => (
+                    {categories.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
                         </option>
