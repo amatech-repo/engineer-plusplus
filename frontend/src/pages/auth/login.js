@@ -18,7 +18,7 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // alert( 'ログインOK！' );
+         alert( 'ログインOK！' );
         console.log(user);
         if (user && router.pathname !== '/') {
           router.push('/');
@@ -41,7 +41,7 @@ export default function Login() {
         <Form>
           <FormGroup>
             <Label>
-              メールアドレス：
+              Email
             </Label>
             <Input
               type="email"
@@ -52,7 +52,7 @@ export default function Login() {
           </FormGroup>
           <FormGroup>
             <Label>
-              パスワード：
+              Password
             </Label>
             <Input
               type="password"
@@ -68,16 +68,15 @@ export default function Login() {
               doLogin();
             }}
           >
-            ログイン
+            Sign In
           </Button>
         </Form>
       </div>
       <div>
 
-        <Link
-          href="/auth/register">
-          新規登録はこちら
-        </Link>
+        
+          
+          <p>Don't have an account?<a href="/auth/register"> Sign Up</a></p>
       </div>
       <div>
         <Link
