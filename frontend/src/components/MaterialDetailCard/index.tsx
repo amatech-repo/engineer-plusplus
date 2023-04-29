@@ -74,6 +74,7 @@ export default MaterialDetailCard;
 const SDetailBox = styled.div`
   width: 100%;
   display: flex;
+  color: #fff;
   background-color: #333;
   border-radius: 16px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -105,13 +106,27 @@ const SCategory = styled.p`
   font-size: 0.8rem;
 `;
 
-const STags = styled.p`
-  font-size: 0.8rem;
+const STags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px 0;
 `;
 
-const STag = styled.span`
-  margin: 0 8px;
+
+const STag = styled.p`
+  display: inline-block;
+  padding: 4px 12px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f2f2f2;
+  border-radius: 16px;
+  transition: background-color 0.2s ease-in-out;
+  cursor: default;
 `;
+
 const SAuthor = styled.p``;
 
 const SDescription = styled.p``;
